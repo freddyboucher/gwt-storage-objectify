@@ -1,0 +1,45 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.container {
+			float: right;
+			width: 320px;
+		}
+		
+		.empty:EMPTY:AFTER {
+			content: "No data";
+			color: gray;
+		}
+	</ui:style>
+	<g:HTMLPanel styleName="{style.container}">
+		<div>
+			<h3>Create a new User</h3>
+			<g:TextBox ui:field="nameTextBox" />
+			<g:Button ui:field="saveBtn">Save</g:Button>
+		</div>
+		<div>
+			<h3>Last created User</h3>
+			<g:InlineLabel ui:field="lastCreatedUserLabel">None</g:InlineLabel>
+			<g:Button ui:field="storeBtn">Store this User in Local Storage</g:Button>
+		</div>
+		<div>
+			<h3>Database Users</h3>
+			<g:HTMLPanel tag="ul" ui:field="databaseUsersPanel"
+				styleName="{style.empty}" />
+			<div>
+				<g:Button ui:field="databaseReloadBtn">Reload</g:Button>
+				<g:Button ui:field="databaseClearBtn">Clear</g:Button>
+			</div>
+		</div>
+		<div>
+			<h3>Local Storage Users</h3>
+			<g:HTMLPanel tag="ul" ui:field="localStorageUsersPanel"
+				styleName="{style.empty}" />
+			<div>
+				<g:Button ui:field="localStorageReloadBtn">Reload</g:Button>
+				<g:Button ui:field="localStorageClearBtn">Clear</g:Button>
+			</div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 
