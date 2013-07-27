@@ -4,9 +4,10 @@ gwt-storage-objectify
 This GWT project is a proof of concept that stores in the Browser Local Storage some Objectify Entities.
 
 It uses:
-- GAE (Google App Engine)
-- Objectify
-- gwt-storage lib
+- [GWT (Google Web Toolkit)](http://www.gwtproject.org/)
+- [GAE (Google App Engine)](http://developers.google.com/appengine/)
+- [Objectify](http://code.google.com/p/objectify-appengine/)
+- [gwt-storage](http://code.google.com/p/gwt-storage/)
 
 
 To use it:
