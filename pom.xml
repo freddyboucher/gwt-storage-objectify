@@ -34,10 +34,11 @@
 				<checksumPolicy>ignore</checksumPolicy>
 			</releases>
 			<snapshots>
-				<enabled>false</enabled>
+				<enabled>true</enabled>
 			</snapshots>
 			<url>file://${project.basedir}/lib</url>
 		</repository>
+		
 	</repositories>
 
 
@@ -98,7 +99,7 @@
 		<dependency>
 			<groupId>gwt-storage</groupId>
 			<artifactId>gwt-storage</artifactId>
-			<version>1.0</version>
+			<version>1.1-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
