@@ -78,11 +78,6 @@
     </dependency>
     <dependency>
       <groupId>com.google.appengine</groupId>
-      <artifactId>appengine-api-labs</artifactId>
-      <version>${gae.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.appengine</groupId>
       <artifactId>appengine-java-sdk</artifactId>
       <version>${gae.version}</version>
       <type>zip</type>
