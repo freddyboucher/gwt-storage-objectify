@@ -25,23 +25,6 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
-  <repositories>
-    <repository>
-      <id>lib</id>
-      <name>lib</name>
-      <releases>
-        <enabled>true</enabled>
-        <checksumPolicy>ignore</checksumPolicy>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <url>file://${project.basedir}/lib</url>
-    </repository>
-
-  </repositories>
-
-
   <dependencies>
     <!-- Google Web Toolkit (GWT) -->
     <dependency>
@@ -92,9 +75,10 @@
     </dependency>
 
     <dependency>
-      <groupId>gwt-storage</groupId>
+      <groupId>com.seanchenxi.gwt</groupId>
       <artifactId>gwt-storage</artifactId>
-      <version>1.1-SNAPSHOT</version>
+      <version>1.2.0</version>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
