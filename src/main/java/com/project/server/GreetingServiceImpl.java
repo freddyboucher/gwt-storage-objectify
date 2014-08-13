@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyService;
 import com.project.client.GreetingService;
 import com.project.shared.entities.User;
@@ -30,7 +31,8 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 
   @Override
   public User save(User user) {
-    ObjectifyService.ofy().save().entity(user).now();
+    final Key<User> userKey = ObjectifyService.ofy().save().entity(user).now();
+    user.setUserKey(userKey);
     return user;
   }
 
