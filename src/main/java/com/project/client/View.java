@@ -20,15 +20,20 @@ import com.google.gwt.user.client.ui.Widget;
 import com.project.shared.entities.User;
 import com.seanchenxi.gwt.storage.client.StorageExt;
 import com.seanchenxi.gwt.storage.client.StorageKey;
-import com.seanchenxi.gwt.storage.client.StorageKeyFactory;
+import com.seanchenxi.gwt.storage.client.StorageKeyProvider;
 
 public class View extends Composite {
+
+  interface MyStorageKeyProvider extends StorageKeyProvider {
+    @Key("STORAGE_USERS_KEY")
+    StorageKey<StoredUsers> key();
+  }
 
   interface ViewUiBinder extends UiBinder<Widget, View> {
   }
 
   private static ViewUiBinder uiBinder = GWT.create(ViewUiBinder.class);
-
+  private final static MyStorageKeyProvider KEY_PROVIDER = GWT.create(MyStorageKeyProvider.class);
   @UiField
   protected TextBox nameTextBox;
   @UiField
@@ -52,7 +57,6 @@ public class View extends Composite {
   private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
   private User lastCreatedUser;
   private final StorageExt localStorage = StorageExt.getLocalStorage();
-  private final StorageKey<StoredUsers> key = StorageKeyFactory.objectKey("STORAGE_USERS_KEY");
 
   public View() {
     initWidget(uiBinder.createAndBindUi(this));
@@ -134,9 +138,9 @@ public class View extends Composite {
       @Override
       public void onClick(ClickEvent event) {
         if (localStorage != null) {
-          if (localStorage.containsKey(key)) {
+          if (localStorage.containsKey(KEY_PROVIDER.key())) {
             try {
-              localStorage.remove(key);
+              localStorage.remove(KEY_PROVIDER.key());
               Logger.getLogger("").info("Local Storage has been cleared.");
               localStorageReloadUsers();
             } catch (Exception e) {
@@ -168,10 +172,10 @@ public class View extends Composite {
 
   private void initLocalStorage() {
     if (localStorage != null) {
-      if (!localStorage.containsKey(key)) {
+      if (!localStorage.containsKey(KEY_PROVIDER.key())) {
         try {
           final StoredUsers storedUsers = new StoredUsers();
-          localStorage.put(key, storedUsers);
+          localStorage.put(KEY_PROVIDER.key(), storedUsers);
           Logger.getLogger("").info("Local Storage has been initialized.");
         } catch (Exception e) {
           Logger.getLogger("").log(Level.SEVERE, "Local Storage hasn't been initialized.", e);
@@ -183,9 +187,9 @@ public class View extends Composite {
   private void localStorageReloadUsers() {
     localStorageUsersPanel.clear();
     if (localStorage != null) {
-      if (localStorage.containsKey(key)) {
+      if (localStorage.containsKey(KEY_PROVIDER.key())) {
         try {
-          final StoredUsers storedUsers = localStorage.get(key);
+          final StoredUsers storedUsers = localStorage.get(KEY_PROVIDER.key());
           for (User user : storedUsers.getUsers()) {
             localStorageUsersPanel.add(new HTMLPanel("li", user.getName()));
           }
@@ -201,9 +205,9 @@ public class View extends Composite {
     if (localStorage != null) {
       initLocalStorage();
       try {
-        final StoredUsers storedUsers = localStorage.get(key);
+        final StoredUsers storedUsers = localStorage.get(KEY_PROVIDER.key());
         final boolean added = storedUsers.getUsers().add(user);
-        localStorage.put(key, storedUsers);
+        localStorage.put(KEY_PROVIDER.key(), storedUsers);
         if (added) {
           Logger.getLogger("").info(user.getName() + " has been stored in Local Storage.");
         }

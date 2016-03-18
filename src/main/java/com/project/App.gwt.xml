@@ -1,37 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- When updating your version of GWT, you should also update this DTD reference, 
-	so that your app can take advantage of the latest GWT module capabilities. -->
-<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.5.1//EN"
-  "http://google-web-toolkit.googlecode.com/svn/tags/2.5.1/distro-source/core/src/gwt-module.dtd">
+<!DOCTYPE module SYSTEM "https://raw.githubusercontent.com/gwtproject/gwt/2.7.0/distro-source/core/src/gwt-module.dtd">
 <module rename-to='app'>
-	<inherits name='com.google.gwt.user.User' />
-	<inherits name='com.google.gwt.user.theme.clean.Clean' />
-	<inherits name="com.googlecode.objectify.Objectify" />
+  <inherits name='com.google.gwt.user.User' />
+  <inherits name='com.google.gwt.user.theme.clean.Clean' />
+  <inherits name="com.googlecode.objectify.Objectify" />
 
-	<inherits name="com.seanchenxi.gwt.storage.Storage" />
-	<set-configuration-property name="storage.type.finder"
-		value="xml" />
+  <inherits name="com.seanchenxi.gwt.storage.Storage" />
+  <set-configuration-property name="storage.type.finder" value="xml" />
 
-	<inherits name="org.hibernate.validator.HibernateValidator" />
-	<replace-with class="com.learnkeeper.client.util.SimpleValidatorFactory">
-		<when-type-is class="javax.validation.ValidatorFactory" />
-	</replace-with>
+  <inherits name="com.google.gwt.logging.Logging" />
+  <set-property name="gwt.logging.logLevel" value="ALL" />
+  <set-property name="gwt.logging.enabled" value="TRUE" />
+  <set-property name="gwt.logging.systemHandler" value="ENABLED" />
+  <set-property name="gwt.logging.developmentModeHandler" value="ENABLED" />
+  <set-property name="gwt.logging.consoleHandler" value="ENABLED" />
+  <set-property name="gwt.logging.hasWidgetsHandler" value="ENABLED" />
+  <set-property name="gwt.logging.simpleRemoteHandler" value="DISABLED" />
 
-	<inherits name="com.google.gwt.logging.Logging" />
-	<set-property name="gwt.logging.logLevel" value="ALL" />
-	<set-property name="gwt.logging.enabled" value="TRUE" />
-	<set-property name="gwt.logging.systemHandler" value="ENABLED" />
-	<set-property name="gwt.logging.developmentModeHandler"
-		value="ENABLED" />
-	<set-property name="gwt.logging.consoleHandler" value="DISABLED" />
-	<set-property name="gwt.logging.firebugHandler" value="DISABLED" />
-	<set-property name="gwt.logging.popupHandler" value="ENABLED" />
-	<set-property name="gwt.logging.simpleRemoteHandler"
-		value="DISABLED" />
+  <set-property name="compiler.stackMode" value="emulated" />
+  <set-configuration-property name="compiler.emulatedStack.recordLineNumbers" value="true" />
+  <set-configuration-property name="compiler.emulatedStack.recordFileNames" value="true" />
 
-	<entry-point class='com.project.client.App' />
+  <entry-point class='com.project.client.App' />
 
-	<source path='client' />
-	<source path='shared' />
+  <source path='client' />
+  <source path='shared' />
 </module>
 
