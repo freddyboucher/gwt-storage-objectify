@@ -7,12 +7,14 @@ import java.util.logging.Logger;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.logging.client.HasWidgetsLogHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.TextBox;
@@ -33,7 +35,10 @@ public class View extends Composite {
   }
 
   private static ViewUiBinder uiBinder = GWT.create(ViewUiBinder.class);
-  private final static MyStorageKeyProvider KEY_PROVIDER = GWT.create(MyStorageKeyProvider.class);
+  private static final MyStorageKeyProvider KEY_PROVIDER = GWT.create(MyStorageKeyProvider.class);
+  private static final Logger logger = Logger.getLogger("");
+  @UiField
+  protected FlowPanel loggingPanel;
   @UiField
   protected TextBox nameTextBox;
   @UiField
@@ -60,6 +65,8 @@ public class View extends Composite {
 
   public View() {
     initWidget(uiBinder.createAndBindUi(this));
+    logger.addHandler(new HasWidgetsLogHandler(loggingPanel));
+
     nameTextBox.getElement().setAttribute("placeholder", "User's name");
 
     saveBtn.addClickHandler(new ClickHandler() {
@@ -71,12 +78,12 @@ public class View extends Composite {
           greetingService.save(newUser, new AsyncCallback<User>() {
             @Override
             public void onFailure(Throwable caught) {
-              Logger.getLogger("").log(Level.SEVERE, "", caught);
+              logger.log(Level.SEVERE, "", caught);
             }
 
             @Override
             public void onSuccess(User user) {
-              Logger.getLogger("").info(user.getName() + " has been saved.");
+              logger.info(user.getName() + " has been saved.");
               nameTextBox.setText(null);
               setLastCreatedUser(user);
               databaseReloadUsers();
@@ -114,12 +121,12 @@ public class View extends Composite {
         greetingService.clearUsers(new AsyncCallback<Void>() {
           @Override
           public void onFailure(Throwable caught) {
-            Logger.getLogger("").log(Level.SEVERE, "Database hasn't been cleared.", caught);
+            logger.log(Level.SEVERE, "Database hasn't been cleared.", caught);
           }
 
           @Override
           public void onSuccess(Void result) {
-            Logger.getLogger("").info("Database has been cleared.");
+            logger.info("Database has been cleared.");
             databaseReloadUsers();
           }
         });
@@ -141,10 +148,10 @@ public class View extends Composite {
           if (localStorage.containsKey(KEY_PROVIDER.key())) {
             try {
               localStorage.remove(KEY_PROVIDER.key());
-              Logger.getLogger("").info("Local Storage has been cleared.");
+              logger.info("Local Storage has been cleared.");
               localStorageReloadUsers();
             } catch (Exception e) {
-              Logger.getLogger("").log(Level.SEVERE, "Local Storage hasn't been cleared.", e);
+              logger.log(Level.SEVERE, "Local Storage hasn't been cleared.", e);
             }
           }
         }
@@ -157,12 +164,12 @@ public class View extends Composite {
     greetingService.getUsers(new AsyncCallback<List<User>>() {
       @Override
       public void onFailure(Throwable caught) {
-        Logger.getLogger("").log(Level.SEVERE, "Reload Users from Database has failed.", caught);
+        logger.log(Level.SEVERE, "Reload Users from Database has failed.", caught);
       }
 
       @Override
       public void onSuccess(List<User> users) {
-        Logger.getLogger("").info("Reload Users from Database has succeeded.");
+        logger.info("Reload Users from Database has succeeded.");
         for (User user : users) {
           databaseUsersPanel.add(new HTMLPanel("li", user.getName()));
         }
@@ -176,9 +183,9 @@ public class View extends Composite {
         try {
           final StoredUsers storedUsers = new StoredUsers();
           localStorage.put(KEY_PROVIDER.key(), storedUsers);
-          Logger.getLogger("").info("Local Storage has been initialized.");
+          logger.info("Local Storage has been initialized.");
         } catch (Exception e) {
-          Logger.getLogger("").log(Level.SEVERE, "Local Storage hasn't been initialized.", e);
+          logger.log(Level.SEVERE, "Local Storage hasn't been initialized.", e);
         }
       }
     }
@@ -193,9 +200,9 @@ public class View extends Composite {
           for (User user : storedUsers.getUsers()) {
             localStorageUsersPanel.add(new HTMLPanel("li", user.getName()));
           }
-          Logger.getLogger("").info("Reload Users from Local Storage has succeeded.");
+          logger.info("Reload Users from Local Storage has succeeded.");
         } catch (Exception e) {
-          Logger.getLogger("").log(Level.SEVERE, "Reload Users from Local Storage has failed.", e);
+          logger.log(Level.SEVERE, "Reload Users from Local Storage has failed.", e);
         }
       }
     }
@@ -209,10 +216,10 @@ public class View extends Composite {
         final boolean added = storedUsers.getUsers().add(user);
         localStorage.put(KEY_PROVIDER.key(), storedUsers);
         if (added) {
-          Logger.getLogger("").info(user.getName() + " has been stored in Local Storage.");
+          logger.info(user.getName() + " has been stored in Local Storage.");
         }
       } catch (Exception e) {
-        Logger.getLogger("").log(Level.SEVERE, user.getName() + " hasn't been stored in Local Storage.", e);
+        logger.log(Level.SEVERE, user.getName() + " hasn't been stored in Local Storage.", e);
       }
     }
   }
