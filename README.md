@@ -5,9 +5,12 @@ This GWT project is a proof of concept that stores in the Browser Local Storage 
 
 It uses:
 - [GWT (Google Web Toolkit)](http://www.gwtproject.org/)
+- [GWT RPC (Server Communication)](http://www.gwtproject.org/doc/latest/DevGuideServerCommunication.html)
+- [GWT Logging](http://www.gwtproject.org/doc/latest/DevGuideLogging.html)
 - [GAE (Google App Engine)](http://developers.google.com/appengine/)
-- [Objectify](http://code.google.com/p/objectify-appengine/)
-- [gwt-storage](http://code.google.com/p/gwt-storage/)
+- [Objectify](https://github.com/objectify/objectify)
+- [Objectify GWT](https://github.com/objectify/objectify-gwt)
+- [GWT Storage](https://github.com/seanchenxi/gwt-storage)
 - [Bean Validation](http://www.gwtproject.org/doc/latest/DevGuideValidation.html)
 
 
