@@ -13,7 +13,7 @@ import javax.validation.groups.Default;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.googlecode.objectify.ObjectifyService;
-import com.project.client.GreetingService;
+import com.project.shared.GreetingService;
 import com.project.shared.entities.User;
 
 /**

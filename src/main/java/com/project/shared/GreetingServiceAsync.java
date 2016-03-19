@@ -1,4 +1,4 @@
-package com.project.client;
+package com.project.shared;
 
 import java.util.List;
 
