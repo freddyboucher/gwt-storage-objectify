@@ -12,6 +12,7 @@ It uses:
 - [Objectify GWT](https://github.com/objectify/objectify-gwt)
 - [GWT Storage](https://github.com/seanchenxi/gwt-storage)
 - [Bean Validation](http://www.gwtproject.org/doc/latest/DevGuideValidation.html)
+- [Guava (& Guava GWT)](https://github.com/google/guava)
 
 
 To use it:

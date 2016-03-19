@@ -1,7 +1,5 @@
 package com.project.server;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -11,6 +9,8 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.groups.Default;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.googlecode.objectify.ObjectifyService;
 import com.project.shared.GreetingService;
@@ -33,7 +33,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 
   @Override
   public List<User> getUsers() {
-    return new ArrayList<User>(ObjectifyService.ofy().load().type(User.class).list());
+    return Lists.newArrayList(ObjectifyService.ofy().load().type(User.class).list());
   }
 
   @Override
@@ -41,7 +41,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
     Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
     Set<ConstraintViolation<User>> violations = validator.validate(user, Default.class);
     if (!violations.isEmpty()) {
-      throw new ConstraintViolationException(new HashSet<ConstraintViolation<?>>(violations));
+      throw new ConstraintViolationException(ImmutableSet.<ConstraintViolation<?>> copyOf(violations));
     }
     ObjectifyService.ofy().save().entity(user).now();
     return user;

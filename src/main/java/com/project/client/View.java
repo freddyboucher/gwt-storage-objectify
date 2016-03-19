@@ -9,6 +9,8 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.validation.groups.Default;
 
+import com.google.common.io.BaseEncoding;
+import com.google.common.primitives.Longs;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -92,7 +94,10 @@ public class View extends Composite {
 
             @Override
             public void onSuccess(User user) {
-              logger.info(user.getName() + " has been saved.");
+              // Guava GWT works well in front-end code
+              final String idBase32Encoded = BaseEncoding.base32().encode(Longs.toByteArray(user.getId()));
+              logger.info("'" + user.getName() + "' User has been saved. id=" + user.getId() + " (base32 encoded="
+                  + idBase32Encoded + ")");
               nameTextBox.setText(null);
               setLastCreatedUser(user);
               databaseReloadUsers();
