@@ -1,8 +1,13 @@
 package com.project.client;
 
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
+import javax.validation.groups.Default;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -10,7 +15,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.logging.client.HasWidgetsLogHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -19,6 +23,7 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.validation.client.impl.Validation;
 import com.project.shared.entities.User;
 import com.seanchenxi.gwt.storage.client.StorageExt;
 import com.seanchenxi.gwt.storage.client.StorageKey;
@@ -37,6 +42,7 @@ public class View extends Composite {
   private static ViewUiBinder uiBinder = GWT.create(ViewUiBinder.class);
   private static final MyStorageKeyProvider KEY_PROVIDER = GWT.create(MyStorageKeyProvider.class);
   private static final Logger logger = Logger.getLogger("");
+  private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
   @UiField
   protected FlowPanel loggingPanel;
   @UiField
@@ -72,13 +78,14 @@ public class View extends Composite {
     saveBtn.addClickHandler(new ClickHandler() {
       @Override
       public void onClick(ClickEvent event) {
-        if (!nameTextBox.getText().trim().isEmpty()) {
-          User newUser = new User();
-          newUser.setName(nameTextBox.getText().trim());
+        User newUser = new User();
+        newUser.setName(nameTextBox.getText().trim());
+        Set<ConstraintViolation<User>> violations = VALIDATOR.validate(newUser, Default.class);
+        if (violations.isEmpty()) {
           greetingService.save(newUser, new AsyncCallback<User>() {
             @Override
             public void onFailure(Throwable caught) {
-              logger.log(Level.SEVERE, "", caught);
+              logger.log(Level.SEVERE, "User hasn't been saved.", caught);
             }
 
             @Override
@@ -90,7 +97,9 @@ public class View extends Composite {
             }
           });
         } else {
-          Window.alert("Please give a name");
+          for (ConstraintViolation<User> constraintViolation : violations) {
+            logger.warning(constraintViolation.getMessage());
+          }
         }
       }
     });
@@ -99,7 +108,7 @@ public class View extends Composite {
       @Override
       public void onClick(ClickEvent event) {
         if (lastCreatedUser == null) {
-          Window.alert("No User has been created yet.");
+          logger.warning("No User has been created yet.");
         } else {
           localStore(lastCreatedUser);
           localStorageReloadUsers();

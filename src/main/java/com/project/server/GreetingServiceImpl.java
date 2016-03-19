@@ -1,7 +1,15 @@
 package com.project.server;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.groups.Default;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.googlecode.objectify.ObjectifyService;
@@ -30,6 +38,11 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 
   @Override
   public User save(User user) {
+    Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+    Set<ConstraintViolation<User>> violations = validator.validate(user, Default.class);
+    if (!violations.isEmpty()) {
+      throw new ConstraintViolationException(new HashSet<ConstraintViolation<?>>(violations));
+    }
     ObjectifyService.ofy().save().entity(user).now();
     return user;
   }

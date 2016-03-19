@@ -8,6 +8,7 @@ It uses:
 - [GAE (Google App Engine)](http://developers.google.com/appengine/)
 - [Objectify](http://code.google.com/p/objectify-appengine/)
 - [gwt-storage](http://code.google.com/p/gwt-storage/)
+- [Bean Validation](http://www.gwtproject.org/doc/latest/DevGuideValidation.html)
 
 
 To use it:

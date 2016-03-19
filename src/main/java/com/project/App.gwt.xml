@@ -8,6 +8,11 @@
   <inherits name="com.seanchenxi.gwt.storage.Storage" />
   <set-configuration-property name="storage.type.finder" value="xml" />
 
+  <inherits name="org.hibernate.validator.HibernateValidator" />
+  <replace-with class="com.project.client.SimpleValidatorFactory">
+    <when-type-is class="javax.validation.ValidatorFactory" />
+  </replace-with>
+
   <inherits name="com.google.gwt.logging.Logging" />
   <set-property name="gwt.logging.logLevel" value="ALL" />
   <set-property name="gwt.logging.enabled" value="TRUE" />
