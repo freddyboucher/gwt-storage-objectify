@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.project.shared.entities.GreetingResponse;
 import com.project.shared.entities.User;
 
 /**
@@ -15,5 +16,5 @@ public interface GreetingService extends RemoteService {
 
   public List<User> getUsers();
 
-  public User save(User user);
+  GreetingResponse greetServer(String username);
 }

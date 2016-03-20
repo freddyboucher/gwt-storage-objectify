@@ -14,6 +14,8 @@ import com.google.common.primitives.Longs;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.logging.client.HasWidgetsLogHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -23,11 +25,13 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.validation.client.impl.Validation;
 import com.project.shared.GreetingService;
 import com.project.shared.GreetingServiceAsync;
+import com.project.shared.entities.GreetingResponse;
 import com.project.shared.entities.User;
 import com.seanchenxi.gwt.storage.client.StorageExt;
 import com.seanchenxi.gwt.storage.client.StorageKey;
@@ -71,6 +75,7 @@ public class View extends Composite {
   protected Button localStorageClearBtn;
   private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
   private User lastCreatedUser;
+
   private final StorageExt localStorage = StorageExt.getLocalStorage();
 
   public View() {
@@ -82,22 +87,34 @@ public class View extends Composite {
     saveBtn.addClickHandler(new ClickHandler() {
       @Override
       public void onClick(ClickEvent event) {
-        User newUser = new User();
-        newUser.setName(nameTextBox.getText().trim());
-        Set<ConstraintViolation<User>> violations = VALIDATOR.validate(newUser, Default.class);
+        Set<ConstraintViolation<User>> violations =
+            VALIDATOR.validateValue(User.class, "name", nameTextBox.getText().trim(), Default.class);
         if (violations.isEmpty()) {
-          greetingService.save(newUser, new AsyncCallback<User>() {
+          greetingService.greetServer(nameTextBox.getText().trim(), new AsyncCallback<GreetingResponse>() {
             @Override
             public void onFailure(Throwable caught) {
-              logger.log(Level.SEVERE, "User hasn't been saved.", caught);
+              logger.log(Level.SEVERE, "greetServer has thrown an Exception.", caught);
             }
 
             @Override
-            public void onSuccess(User user) {
+            public void onSuccess(GreetingResponse greetingResponse) {
+              final User user = greetingResponse.getUserRef().get();
+              if (greetingResponse.getCount() == 0) {
+                logger.info("A new User name:" + user.getName() + " id:" + user.getId() + " has been saved.");
+              }
               // Guava GWT works well in front-end code
               final String idBase32Encoded = BaseEncoding.base32().encode(Longs.toByteArray(user.getId()));
-              logger.info("'" + user.getName() + "' User has been saved. id=" + user.getId() + " (base32 encoded="
-                  + idBase32Encoded + ")");
+              logger.info("User id:" + user.getId() + " base32 encoded:" + idBase32Encoded);
+
+              final GreetingDialogBox greetingDialogBox = new GreetingDialogBox(greetingResponse);
+              greetingDialogBox.asDialogBox().addCloseHandler(new CloseHandler<PopupPanel>() {
+                @Override
+                public void onClose(CloseEvent<PopupPanel> event) {
+                  nameTextBox.setFocus(true);
+                }
+              });
+              greetingDialogBox.center();
+
               nameTextBox.setText(null);
               setLastCreatedUser(user);
               databaseReloadUsers();
@@ -244,5 +261,4 @@ public class View extends Composite {
     lastCreatedUser = user;
     lastCreatedUserLabel.setText(user.getName());
   }
-
 }

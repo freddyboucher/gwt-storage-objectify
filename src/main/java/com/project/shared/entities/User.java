@@ -12,10 +12,10 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 
 @Entity
-@Index
 public class User implements Serializable {
   @Id
   private Long id;
+  @Index
   @Length(min = 1, max = 64)
   @Pattern(regexp = "^\\w*$", message = "Only Word character.")
   @NotNull

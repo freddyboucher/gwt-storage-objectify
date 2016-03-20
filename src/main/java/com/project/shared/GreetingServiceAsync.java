@@ -3,6 +3,7 @@ package com.project.shared;
 import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.project.shared.entities.GreetingResponse;
 import com.project.shared.entities.User;
 
 /**
@@ -13,5 +14,5 @@ public interface GreetingServiceAsync {
 
   void getUsers(AsyncCallback<List<User>> callback);
 
-  void save(User user, AsyncCallback<User> callback);
+  void greetServer(String username, AsyncCallback<GreetingResponse> callback);
 }

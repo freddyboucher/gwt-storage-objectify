@@ -17,12 +17,12 @@
     <g:cell>
       <g:HTMLPanel width="320px">
         <div>
-          <h3>Create a new User</h3>
+          <h3>User's name</h3>
           <g:TextBox ui:field="nameTextBox" />
-          <g:Button ui:field="saveBtn">Save</g:Button>
+          <g:Button ui:field="saveBtn">Send</g:Button>
         </div>
         <div>
-          <h3>Last created User</h3>
+          <h3>Last User</h3>
           <g:InlineLabel ui:field="lastCreatedUserLabel">None</g:InlineLabel>
           <g:Button ui:field="storeBtn">Store this User in Local Storage</g:Button>
         </div>
