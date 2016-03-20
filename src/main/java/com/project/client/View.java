@@ -52,27 +52,27 @@ public class View extends Composite {
   private static final Logger logger = Logger.getLogger("");
   private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
   @UiField
-  protected FlowPanel loggingPanel;
+  FlowPanel loggingPanel;
   @UiField
-  protected TextBox nameTextBox;
+  TextBox nameTextBox;
   @UiField
-  protected Button saveBtn;
+  Button saveBtn;
   @UiField
-  protected InlineLabel lastCreatedUserLabel;
+  InlineLabel lastCreatedUserLabel;
   @UiField
-  protected Button storeBtn;
+  Button storeBtn;
   @UiField
-  protected HTMLPanel databaseUsersPanel;
+  HTMLPanel databaseUsersPanel;
   @UiField
-  protected Button databaseReloadBtn;
+  Button databaseReloadBtn;
   @UiField
-  protected Button databaseClearBtn;
+  Button databaseClearBtn;
   @UiField
-  protected HTMLPanel localStorageUsersPanel;
+  HTMLPanel localStorageUsersPanel;
   @UiField
-  protected Button localStorageReloadBtn;
+  Button localStorageReloadBtn;
   @UiField
-  protected Button localStorageClearBtn;
+  Button localStorageClearBtn;
   private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
   private User lastCreatedUser;
 
