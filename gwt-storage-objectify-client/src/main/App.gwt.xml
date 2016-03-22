@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE module SYSTEM "https://raw.githubusercontent.com/gwtproject/gwt/2.7.0/distro-source/core/src/gwt-module.dtd">
-<module rename-to='app'>
+<module>
   <inherits name='com.google.gwt.user.User' />
   <inherits name='com.google.gwt.user.theme.clean.Clean' />
   <inherits name="com.googlecode.objectify.Objectify" />
-   <inherits name="com.google.common.collect.Collect" />
-   <inherits name="com.google.common.io.Io"/>
+  <inherits name="com.google.common.collect.Collect" />
+  <inherits name="com.google.common.io.Io" />
 
   <inherits name="com.seanchenxi.gwt.storage.Storage" />
   <set-configuration-property name="storage.type.finder" value="xml" />

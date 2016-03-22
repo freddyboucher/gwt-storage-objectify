@@ -3,6 +3,8 @@ gwt-storage-objectify
 
 This GWT project is a proof of concept that stores in the Browser Local Storage some Objectify Entities.
 
+Live demo: [https://gwt-storage-objectify.appspot.com/](https://gwt-storage-objectify.appspot.com/)
+
 It uses:
 - [GWT (Google Web Toolkit)](http://www.gwtproject.org/)
 - [GWT RPC (Server Communication)](http://www.gwtproject.org/doc/latest/DevGuideServerCommunication.html)
@@ -14,8 +16,15 @@ It uses:
 - [Bean Validation](http://www.gwtproject.org/doc/latest/DevGuideValidation.html)
 - [Guava (& Guava GWT)](https://github.com/google/guava)
 
+It uses [tbroyer/gwt-maven-plugin](https://github.com/tbroyer/gwt-maven-plugin) and follows [tbroyer/gwt-maven-archetypes](https://github.com/tbroyer/gwt-maven-archetypes) recommended  project structure.
 
-To use it:
-- mvn clean package
-- mvn gwt:run
-- then open your browser at http://127.0.0.1:8888/
+To use it in **prod** mode:
+- in */gwt-storage-objectify/* ➜ `mvn clean install` (only one time)
+- in */gwt-storage-objectify/gwt-storage-objectify-server/* ➜ `mvn appengine:devserver`
+- then open your browser at [http://localhost:8888/](http://localhost:8888/)
+
+To use it in **dev** mode:
+- in */gwt-storage-objectify/* ➜ `mvn clean install` (only one time)
+- in */gwt-storage-objectify/* ➜ `mvn gwt:codeserver -pl gwt-storage-objectify-client -am`
+- in */gwt-storage-objectify/gwt-storage-objectify-server/* ➜ `mvn appengine:devserver -Denv=dev`
+- then open your browser at [http://localhost:8888/](http://localhost:8888/)
