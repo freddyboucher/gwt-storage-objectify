@@ -1,4 +1,8 @@
-/target
+*.iml
+*.idea
+.idea/
+target/
+/bin
 *.class
 *.jar
 *.war
@@ -18,4 +22,3 @@ local.properties
 .loadpath
 .factorypath
 .DS_Store
-
