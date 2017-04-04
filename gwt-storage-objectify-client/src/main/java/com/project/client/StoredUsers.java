@@ -7,7 +7,7 @@ import java.util.Set;
 import com.project.shared.entities.User;
 
 public class StoredUsers implements Serializable {
-  private Set<User> users = new HashSet<User>();
+  private Set<User> users = new HashSet<>();
 
   public Set<User> getUsers() {
     return users;

@@ -1,8 +1,6 @@
 package com.project.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -17,7 +15,7 @@ class GreetingDialogBox {
   interface Binder extends UiBinder<DialogBox, GreetingDialogBox> {
   }
 
-  private static Binder uiBinder = GWT.create(Binder.class);
+  private static final Binder uiBinder = GWT.create(Binder.class);
 
   @UiField
   DialogBox dialogBox;
@@ -39,12 +37,7 @@ class GreetingDialogBox {
         .appendEscaped(greetingResponse.getUserAgent()).toSafeHtml());
     closeButton.setFocus(true);
 
-    closeButton.addClickHandler(new ClickHandler() {
-      @Override
-      public void onClick(ClickEvent event) {
-        dialogBox.hide();
-      }
-    });
+    closeButton.addClickHandler(event -> dialogBox.hide());
   }
 
   public DialogBox asDialogBox() {
