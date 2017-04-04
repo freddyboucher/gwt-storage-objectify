@@ -76,7 +76,7 @@
         <configuration>
           <moduleName>com.project.App</moduleName>
           <moduleShortName>app</moduleShortName>
-          <moduleTemplate>${project.basedir}/src/main/App.gwt.xml</moduleTemplate>
+          <moduleTemplate>src/main/resources/App.gwt.xml</moduleTemplate>
         </configuration>
       </plugin>
     </plugins>
