@@ -69,6 +69,9 @@
         <groupId>net.ltgt.gwt.maven</groupId>
         <artifactId>gwt-maven-plugin</artifactId>
         <configuration>
+          <!-- Do not add codeserver configuration here as per the documentation: 
+               https://tbroyer.github.io/gwt-maven-plugin/codeserver.html
+               Only the parent pom config will take effect. -->
           <moduleName>com.project.App</moduleName>
           <moduleShortName>app</moduleShortName>
           <moduleTemplate>${project.basedir}/src/main/App.gwt.xml</moduleTemplate>
