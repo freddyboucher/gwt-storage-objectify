@@ -3,6 +3,7 @@ package com.project.server;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
@@ -24,6 +25,8 @@ import com.project.shared.entities.User;
 @SuppressWarnings("serial")
 public class GreetingServiceImpl extends RemoteServiceServlet implements GreetingService {
 
+  private static final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+
   static {
     ObjectifyService.register(User.class);
     ObjectifyService.register(GreetingResponse.class);
@@ -33,6 +36,10 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
   public void clearUsers() {
     ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(User.class).keys());
     ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(GreetingResponse.class).keys());
+  }
+
+  protected HttpServletRequest getThreadLocalRequest2() {
+    return getThreadLocalRequest();
   }
 
   @Override
@@ -45,7 +52,6 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
     if (username == null) {
       throw new IllegalArgumentException("user can't be null.");
     }
-    Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
     Set<ConstraintViolation<User>> violations = validator.validateValue(User.class, "name", username, Default.class);
     if (!violations.isEmpty()) {
       throw new ConstraintViolationException(ImmutableSet.<ConstraintViolation<?>> copyOf(violations));
@@ -60,11 +66,11 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 
     Ref<User> userRef = Ref.create(user);
 
-    final int count = ObjectifyService.ofy().load().type(GreetingResponse.class).filter("userRef", userRef).count();
+    int count = ObjectifyService.ofy().load().type(GreetingResponse.class).filter("userRef", userRef).count();
 
     GreetingResponse response = new GreetingResponse();
     response.setServerInfo(getServletContext().getServerInfo());
-    response.setUserAgent(getThreadLocalRequest().getHeader("User-Agent"));
+    response.setUserAgent(getThreadLocalRequest2().getHeader("User-Agent"));
     response.setUserRef(userRef);
     ObjectifyService.ofy().save().entity(response);
 
