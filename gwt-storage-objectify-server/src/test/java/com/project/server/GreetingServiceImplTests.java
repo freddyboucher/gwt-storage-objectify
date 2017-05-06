@@ -34,6 +34,7 @@ public class GreetingServiceImplTests extends Mockito {
   @Before
   public void setUp() {
     helper.setUp();
+    OfyHelper.register();
     closeable = ObjectifyService.begin();
     service = spy(GreetingServiceImpl.class);
 

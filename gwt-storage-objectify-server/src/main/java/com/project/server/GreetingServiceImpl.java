@@ -27,11 +27,6 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 
   private static final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
-  static {
-    ObjectifyService.register(User.class);
-    ObjectifyService.register(GreetingResponse.class);
-  }
-
   @Override
   public void clearUsers() {
     ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(User.class).keys());
