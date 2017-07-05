@@ -49,7 +49,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
     }
     Set<ConstraintViolation<User>> violations = validator.validateValue(User.class, "name", username, Default.class);
     if (!violations.isEmpty()) {
-      throw new ConstraintViolationException(ImmutableSet.<ConstraintViolation<?>> copyOf(violations));
+      throw new ConstraintViolationException(ImmutableSet.copyOf(violations));
     }
 
     User user = ObjectifyService.ofy().load().type(User.class).filter("name", username).first().now();

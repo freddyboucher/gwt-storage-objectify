@@ -12,9 +12,9 @@ import com.project.shared.entities.User;
  */
 @RemoteServiceRelativePath("greet")
 public interface GreetingService extends RemoteService {
-  public void clearUsers();
+  void clearUsers();
 
-  public List<User> getUsers();
+  List<User> getUsers();
 
   GreetingResponse greetServer(String username);
 }
