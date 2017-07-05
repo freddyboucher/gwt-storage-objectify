@@ -3,6 +3,7 @@ package com.project.server;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -22,7 +23,7 @@ import com.project.shared.entities.User;
 /**
  * The server side implementation of the RPC service.
  */
-@SuppressWarnings("serial")
+@WebServlet("/app/greet")
 public class GreetingServiceImpl extends RemoteServiceServlet implements GreetingService {
 
   private static final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
