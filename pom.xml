@@ -28,8 +28,8 @@
 
     <gwt.version>2.8.1</gwt.version>
 
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
 
     <gae.version>1.9.54</gae.version>
     <gae.application.version>1</gae.application.version>
