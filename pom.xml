@@ -134,9 +134,6 @@
         <groupId>net.ltgt.gwt.maven</groupId>
         <artifactId>gwt-maven-plugin</artifactId>
         <inherited>false</inherited>
-        <configuration>
-          <launcherDir>${project.basedir}/gwt-storage-objectify-server/target/gwt-storage-objectify-server-${project.version}/</launcherDir>
-        </configuration>
       </plugin>
     </plugins>
 
@@ -154,6 +151,7 @@
           <configuration>
             <sourceLevel>1.8</sourceLevel>
             <failOnError>true</failOnError>
+            <launcherDir>${project.parent.basedir}/gwt-storage-objectify-server/target/gwt-storage-objectify-server-${project.version}/</launcherDir>
           </configuration>
         </plugin>
         <plugin>
