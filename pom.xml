@@ -28,6 +28,9 @@
 
     <gae.version>1.9.59</gae.version>
     <gae.application.version>1</gae.application.version>
+    <resteasy.version>3.1.4.Final</resteasy.version>
+    <gwt.jackson.version>0.14.3-SNAPSHOT-20171203</gwt.jackson.version>
+    <restygwt.version>2.2.3-SNAPSHOT-20171125</restygwt.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -55,14 +58,52 @@
       </dependency>
 
       <dependency>
+        <groupId>org.fusesource.restygwt</groupId>
+        <artifactId>restygwt</artifactId>
+        <version>${restygwt.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.ws.rs</groupId>
+        <artifactId>javax.ws.rs-api</artifactId>
+        <version>2.0.1</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jboss.resteasy</groupId>
+        <artifactId>resteasy-jaxrs</artifactId>
+        <version>${resteasy.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.resteasy</groupId>
+        <artifactId>resteasy-servlet-initializer</artifactId>
+        <version>${resteasy.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.resteasy</groupId>
+        <artifactId>resteasy-jackson2-provider</artifactId>
+        <version>${resteasy.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.resteasy</groupId>
+        <artifactId>resteasy-jaxb-provider</artifactId>
+        <version>${resteasy.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.github.nmorel.gwtjackson</groupId>
+        <artifactId>gwt-jackson</artifactId>
+        <version>${gwt.jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.nmorel.gwtjackson</groupId>
+        <artifactId>gwt-jackson-objectify</artifactId>
+        <version>${gwt.jackson.version}</version>
+      </dependency>
+
+      <dependency>
         <groupId>com.googlecode.objectify</groupId>
         <artifactId>objectify</artifactId>
         <version>5.1.21</version>
-      </dependency>
-      <dependency>
-        <groupId>com.googlecode.objectify</groupId>
-        <artifactId>objectify-gwt</artifactId>
-        <version>1.2.1</version>
       </dependency>
 
       <dependency>
@@ -74,12 +115,6 @@
         <groupId>com.google.guava</groupId>
         <artifactId>guava-gwt</artifactId>
         <version>23.0</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.seanchenxi.gwt</groupId>
-        <artifactId>gwt-storage</artifactId>
-        <version>1.4.0</version>
       </dependency>
 
       <dependency>

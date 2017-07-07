@@ -7,12 +7,13 @@ Live demo: [https://gwt-storage-objectify.appspot.com/](https://gwt-storage-obje
 
 It uses:
 - [GWT (Google Web Toolkit)](http://www.gwtproject.org/)
-- [GWT RPC (Server Communication)](http://www.gwtproject.org/doc/latest/DevGuideServerCommunication.html)
+- REST/JSON service with shared JAX-RS 2.0 interface
+  - server: [RESTEasy](http://resteasy.jboss.org/)
+  - client [RestyGWT](http://resty-gwt.github.io/)
 - [GWT Logging](http://www.gwtproject.org/doc/latest/DevGuideLogging.html)
 - [GAE (Google App Engine)](http://developers.google.com/appengine/)
 - [Objectify](https://github.com/objectify/objectify)
-- [Objectify GWT](https://github.com/objectify/objectify-gwt)
-- [GWT Storage](https://github.com/seanchenxi/gwt-storage)
+- [GWT HTML5 Storage](http://www.gwtproject.org/doc/latest/DevGuideHtml5Storage.html)
 - [Bean Validation](http://www.gwtproject.org/doc/latest/DevGuideValidation.html)
 - [Guava (& Guava GWT)](https://github.com/google/guava)
 

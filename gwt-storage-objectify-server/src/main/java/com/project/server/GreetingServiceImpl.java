@@ -3,30 +3,29 @@ package com.project.server;
 import java.util.List;
 import java.util.Set;
 
-import javax.servlet.annotation.WebServlet;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.groups.Default;
+import javax.ws.rs.core.Context;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Lists;
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Ref;
 import com.project.shared.GreetingService;
 import com.project.shared.entities.GreetingResponse;
 import com.project.shared.entities.User;
 
-/**
- * The server side implementation of the RPC service.
- */
-@WebServlet("/app/greet")
-public class GreetingServiceImpl extends RemoteServiceServlet implements GreetingService {
+public class GreetingServiceImpl implements GreetingService {
 
   private static final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+  @Context
+  protected HttpServletRequest request;
+  @Context
+  protected ServletContext context;
 
   @Override
   public void clearUsers() {
@@ -34,17 +33,13 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
     ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(GreetingResponse.class).keys());
   }
 
-  protected HttpServletRequest getThreadLocalRequest2() {
-    return getThreadLocalRequest();
-  }
-
   @Override
   public List<User> getUsers() {
-    return Lists.newArrayList(ObjectifyService.ofy().load().type(User.class).list());
+    return ObjectifyService.ofy().load().type(User.class).list();
   }
 
   @Override
-  public GreetingResponse greetServer(String username) throws IllegalArgumentException {
+  public GreetingResponse greetServer(String username) {
     if (username == null) {
       throw new IllegalArgumentException("user can't be null.");
     }
@@ -60,15 +55,13 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
       ObjectifyService.ofy().save().entity(user).now();
     }
 
-    Ref<User> userRef = Ref.create(user);
-
-    int count = ObjectifyService.ofy().load().type(GreetingResponse.class).filter("userRef", userRef).count();
+    int count = ObjectifyService.ofy().load().type(GreetingResponse.class).filter("userRef", user).count();
 
     GreetingResponse response = new GreetingResponse();
-    response.setServerInfo(getServletContext().getServerInfo());
-    response.setUserAgent(getThreadLocalRequest2().getHeader("User-Agent"));
-    response.setUserRef(userRef);
-    ObjectifyService.ofy().save().entity(response);
+    response.setServerInfo(context.getServerInfo());
+    response.setUserAgent(request.getHeader("User-Agent"));
+    response.setUserRef(Ref.create(user));
+    ObjectifyService.ofy().save().entity(response).now();
 
     response.setCount(count);
     return response;

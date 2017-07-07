@@ -8,7 +8,7 @@
   </filter>
   <filter-mapping>
     <filter-name>ObjectifyFilter</filter-name>
-    <url-pattern>/*</url-pattern>
+    <url-pattern>/api/*</url-pattern>
   </filter-mapping>
 
   <!-- Default page to serve -->

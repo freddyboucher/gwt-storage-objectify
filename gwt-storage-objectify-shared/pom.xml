@@ -11,6 +11,21 @@
 
   <artifactId>gwt-storage-objectify-shared</artifactId>
 
+  <repositories>
+    <repository>
+      <id>3rd-party-repository</id>
+      <releases>
+        <enabled>true</enabled>
+        <checksumPolicy>ignore</checksumPolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <checksumPolicy>ignore</checksumPolicy>
+      </snapshots>
+      <url>file://${project.basedir}/../3rd-party-repository</url>
+    </repository>
+  </repositories>
+
   <dependencies>
     <dependency>
       <groupId>com.google.gwt</groupId>
@@ -18,8 +33,16 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>com.googlecode.objectify</groupId>
-      <artifactId>objectify-gwt</artifactId>
+      <groupId>org.fusesource.restygwt</groupId>
+      <artifactId>restygwt</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>javax.ws.rs-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.github.nmorel.gwtjackson</groupId>
+      <artifactId>gwt-jackson-objectify</artifactId>
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>

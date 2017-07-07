@@ -40,11 +40,11 @@ public class GreetingServiceImplTests extends Mockito {
 
     ServletContext servletContext = mock(ServletContext.class);
     doReturn(SERVER_INFO).when(servletContext).getServerInfo();
-    doReturn(servletContext).when(service).getServletContext();
+    service.context = servletContext;
 
     HttpServletRequest httpServletRequest = mock(HttpServletRequest.class);
     doReturn(USER_AGENT).when(httpServletRequest).getHeader("User-Agent");
-    doReturn(httpServletRequest).when(service).getThreadLocalRequest2();
+    service.request = httpServletRequest;
   }
 
   @After

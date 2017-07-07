@@ -1,5 +1,6 @@
 package com.project.client;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
@@ -9,14 +10,19 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.validation.groups.Default;
 
+import org.fusesource.restygwt.client.Method;
+import org.fusesource.restygwt.client.MethodCallback;
+import org.fusesource.restygwt.client.REST;
+
+import com.github.nmorel.gwtjackson.client.ObjectMapper;
 import com.google.common.io.BaseEncoding;
 import com.google.common.primitives.Longs;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.logging.client.HasWidgetsLogHandler;
+import com.google.gwt.storage.client.Storage;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -26,29 +32,17 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.validation.client.impl.Validation;
 import com.project.shared.GreetingService;
-import com.project.shared.GreetingServiceAsync;
 import com.project.shared.entities.GreetingResponse;
 import com.project.shared.entities.User;
-import com.seanchenxi.gwt.storage.client.StorageExt;
-import com.seanchenxi.gwt.storage.client.StorageKey;
-import com.seanchenxi.gwt.storage.client.StorageKeyProvider;
 
 public class View extends Composite {
 
-  interface MyStorageKeyProvider extends StorageKeyProvider {
-    @Key("STORAGE_USERS_KEY")
-    StorageKey<StoredUsers> key();
-  }
-
-  interface ViewUiBinder extends UiBinder<Widget, View> {
-  }
-
   private static final ViewUiBinder uiBinder = GWT.create(ViewUiBinder.class);
-  private static final MyStorageKeyProvider KEY_PROVIDER = GWT.create(MyStorageKeyProvider.class);
+  private static final String STORAGE_USERS_KEY = "STORAGE_USERS_KEY";
   private static final Logger logger = Logger.getLogger("");
   private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
-  private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-  private final StorageExt localStorage = StorageExt.getLocalStorage();
+  private static final GreetingService GREETING_SERVICE = GWT.create(GreetingService.class);
+  private final Storage localStorage = Storage.getLocalStorageIfSupported();
   @UiField
   FlowPanel loggingPanel;
   @UiField
@@ -98,27 +92,27 @@ public class View extends Composite {
     databaseReloadBtn.addClickHandler(event -> databaseReloadUsers());
     databaseReloadUsers();
 
-    databaseClearBtn.addClickHandler(event -> greetingService.clearUsers(new AsyncCallback<Void>() {
+    databaseClearBtn.addClickHandler(event -> REST.withCallback(new MethodCallback<Void>() {
       @Override
-      public void onFailure(Throwable caught) {
-        logger.log(Level.SEVERE, "Database hasn't been cleared.", caught);
+      public void onFailure(Method method, Throwable throwable) {
+        logger.log(Level.SEVERE, "Database hasn't been cleared.", throwable);
       }
 
       @Override
-      public void onSuccess(Void result) {
+      public void onSuccess(Method method, Void response) {
         logger.info("Database has been cleared.");
         databaseReloadUsers();
       }
-    }));
+    }).call(GREETING_SERVICE).clearUsers());
 
     localStorageReloadBtn.addClickHandler(event -> localStorageReloadUsers());
     localStorageReloadUsers();
 
     localStorageClearBtn.addClickHandler(event -> {
       if (localStorage != null) {
-        if (localStorage.containsKey(KEY_PROVIDER.key())) {
+        if (localStorage.getItem(STORAGE_USERS_KEY) != null) {
           try {
-            localStorage.remove(KEY_PROVIDER.key());
+            localStorage.removeItem(STORAGE_USERS_KEY);
             logger.info("Local Storage has been cleared.");
             localStorageReloadUsers();
           } catch (Exception e) {
@@ -131,26 +125,25 @@ public class View extends Composite {
 
   private void databaseReloadUsers() {
     databaseUsersPanel.clear();
-    greetingService.getUsers(new AsyncCallback<List<User>>() {
+    REST.withCallback(new MethodCallback<List<User>>() {
       @Override
-      public void onFailure(Throwable caught) {
-        logger.log(Level.SEVERE, "Reload Users from Database has failed.", caught);
+      public void onFailure(Method method, Throwable throwable) {
+        logger.log(Level.SEVERE, "Reload Users from Database has failed.", throwable);
       }
 
       @Override
-      public void onSuccess(List<User> users) {
+      public void onSuccess(Method method, List<User> users) {
         logger.info("Reload Users from Database has succeeded.");
         users.forEach(user -> databaseUsersPanel.add(new HTMLPanel("li", user.getName())));
       }
-    });
+    }).call(GREETING_SERVICE).getUsers();
   }
 
   private void initLocalStorage() {
     if (localStorage != null) {
-      if (!localStorage.containsKey(KEY_PROVIDER.key())) {
+      if (localStorage.getItem(STORAGE_USERS_KEY) == null) {
         try {
-          StoredUsers storedUsers = new StoredUsers();
-          localStorage.put(KEY_PROVIDER.key(), storedUsers);
+          localStorage.setItem(STORAGE_USERS_KEY, UsersObjectMapper.INSTANCE.write(Collections.emptySet()));
           logger.info("Local Storage has been initialized.");
         } catch (Exception e) {
           logger.log(Level.SEVERE, "Local Storage hasn't been initialized.", e);
@@ -162,13 +155,15 @@ public class View extends Composite {
   private void localStorageReloadUsers() {
     localStorageUsersPanel.clear();
     if (localStorage != null) {
-      if (localStorage.containsKey(KEY_PROVIDER.key())) {
+      String item = localStorage.getItem(STORAGE_USERS_KEY);
+      if (item != null) {
         try {
-          StoredUsers storedUsers = localStorage.get(KEY_PROVIDER.key());
-          storedUsers.getUsers().forEach(user -> localStorageUsersPanel.add(new HTMLPanel("li", user.getName())));
+          UsersObjectMapper.INSTANCE.read(item).forEach(user -> localStorageUsersPanel.add(new HTMLPanel("li", user.getName())));
           logger.info("Reload Users from Local Storage has succeeded.");
         } catch (Exception e) {
           logger.log(Level.SEVERE, "Reload Users from Local Storage has failed.", e);
+          localStorage.removeItem(STORAGE_USERS_KEY);
+          logger.log(Level.INFO, "Local Storage has been cleared.", e);
         }
       }
     }
@@ -178,9 +173,9 @@ public class View extends Composite {
     if (localStorage != null) {
       initLocalStorage();
       try {
-        StoredUsers storedUsers = localStorage.get(KEY_PROVIDER.key());
-        boolean added = storedUsers.getUsers().add(user);
-        localStorage.put(KEY_PROVIDER.key(), storedUsers);
+        Set<User> users = UsersObjectMapper.INSTANCE.read(localStorage.getItem(STORAGE_USERS_KEY));
+        boolean added = users.add(user);
+        localStorage.setItem(STORAGE_USERS_KEY, UsersObjectMapper.INSTANCE.write(users));
         if (added) {
           logger.info(user.getName() + " has been stored in Local Storage.");
         }
@@ -193,14 +188,14 @@ public class View extends Composite {
   private void processUsername() {
     Set<ConstraintViolation<User>> violations = VALIDATOR.validateValue(User.class, "name", nameTextBox.getText().trim(), Default.class);
     if (violations.isEmpty()) {
-      greetingService.greetServer(nameTextBox.getText().trim(), new AsyncCallback<GreetingResponse>() {
+      REST.withCallback(new MethodCallback<GreetingResponse>() {
         @Override
-        public void onFailure(Throwable caught) {
-          logger.log(Level.SEVERE, "greetServer has thrown an Exception.", caught);
+        public void onFailure(Method method, Throwable throwable) {
+          logger.log(Level.SEVERE, "greetServer has thrown an Exception.", throwable);
         }
 
         @Override
-        public void onSuccess(GreetingResponse greetingResponse) {
+        public void onSuccess(Method method, GreetingResponse greetingResponse) {
           User user = greetingResponse.getUserRef().get();
           if (greetingResponse.getCount() == 0) {
             logger.info("A new User name:" + user.getName() + " id:" + user.getId() + " has been saved.");
@@ -217,7 +212,7 @@ public class View extends Composite {
           setLastCreatedUser(user);
           databaseReloadUsers();
         }
-      });
+      }).call(GREETING_SERVICE).greetServer(nameTextBox.getText().trim());
     } else {
       violations.forEach(constraintViolation -> logger.warning(constraintViolation.getMessage()));
     }
@@ -227,4 +222,10 @@ public class View extends Composite {
     lastCreatedUser = user;
     lastCreatedUserLabel.setText(user.getName());
   }
+
+  public interface UsersObjectMapper extends ObjectMapper<Set<User>> {
+    UsersObjectMapper INSTANCE = GWT.create(UsersObjectMapper.class);
+  }
+
+  interface ViewUiBinder extends UiBinder<Widget, View> {}
 }

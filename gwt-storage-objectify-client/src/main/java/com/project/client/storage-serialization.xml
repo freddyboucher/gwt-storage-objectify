@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE StorageSerialization SYSTEM "https://raw.githubusercontent.com/seanchenxi/gwt-storage/v1.4.0/src/main/resources/com/seanchenxi/gwt/storage/rebind/storage-serialization.dtd">
-
-<StorageSerialization>
-	<!-- use fully qualified class name -->
-	<class>com.project.shared.entities.User</class>
-	<class>com.project.client.StoredUsers</class>
-</StorageSerialization>

@@ -3,12 +3,12 @@
 <module>
   <inherits name='com.google.gwt.user.User' />
   <inherits name='com.google.gwt.user.theme.clean.Clean' />
-  <inherits name="com.googlecode.objectify.Objectify" />
   <inherits name="com.google.common.collect.Collect" />
   <inherits name="com.google.common.io.Io" />
 
-  <inherits name="com.seanchenxi.gwt.storage.Storage" />
-  <set-configuration-property name="storage.type.finder" value="xml" />
+  <inherits name="org.fusesource.restygwt.RestyGWT" />
+  <set-property name="restygwt.encodeDecode.useGwtJackson" value="true" />
+  <inherits name="com.github.nmorel.gwtjackson.objectify.GwtJacksonObjectify" />
 
   <inherits name="org.hibernate.validator.HibernateValidator" />
   <replace-with class="com.project.client.SimpleValidatorFactory">
