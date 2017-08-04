@@ -12,10 +12,6 @@
   <artifactId>gwt-storage-objectify-client</artifactId>
   <packaging>gwt-app</packaging>
 
-  <prerequisites>
-    <maven>${mavenVersion}</maven>
-  </prerequisites>
-
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>

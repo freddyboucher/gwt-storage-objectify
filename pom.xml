@@ -8,10 +8,6 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <prerequisites>
-    <maven>${mavenVersion}</maven>
-  </prerequisites>
-
   <repositories>
     <repository>
       <id>sonatype.snapshots</id>
@@ -22,7 +18,6 @@
   </repositories>
 
   <properties>
-    <mavenVersion>3.0</mavenVersion>
     <!-- App Engine Instances Version -->
     <gae.app.instance.version>0-0-1-snapshot</gae.app.instance.version>
 
