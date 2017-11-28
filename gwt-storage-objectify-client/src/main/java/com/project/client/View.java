@@ -2,6 +2,7 @@ package com.project.client;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.logging.Formatter;
 import java.util.logging.Level;
@@ -23,10 +24,12 @@ import com.google.common.primitives.Longs;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.http.client.UrlBuilder;
 import com.google.gwt.logging.client.HasWidgetsLogHandler;
 import com.google.gwt.storage.client.Storage;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -71,6 +74,10 @@ public class View extends Composite {
   Button localStorageClearBtn;
   @UiField
   Button logOnServerBtn;
+  @UiField
+  Button switchStackModeBtn;
+  @UiField
+  InlineLabel currentStackMode;
   private User lastCreatedUser;
 
   public View() {
@@ -140,17 +147,32 @@ public class View extends Composite {
       }
     });
 
-    logOnServerBtn.addClickHandler(event -> REST.withCallback(new TextCallback() {
-      @Override
-      public void onFailure(Method method, Throwable throwable) {
-        logger.log(Level.SEVERE, "Cannot log on Server.", throwable);
-      }
+    logOnServerBtn.addClickHandler(event -> {
+      Throwable throwable = new Throwable();
+      REST.withCallback(new TextCallback() {
+        @Override
+        public void onFailure(Method method, Throwable throwable) {
+          logger.log(Level.SEVERE, "Cannot log on Server.", throwable);
+        }
 
-      @Override
-      public void onSuccess(Method method, String response) {
-        logger.info(response);
-      }
-    }).call(App.REMOTE_LOGGING_SERVICE).logOnServer(new Throwable(), "INFO", GWT.getPermutationStrongName()));
+        @Override
+        public void onSuccess(Method method, String response) {
+          logger.log(Level.INFO, "Client StackTrace", throwable);
+          logger.log(Level.INFO, "Server/Deobfuscated StackTrace\n" + response);
+        }
+      }).call(App.DEOBFUSCATOR_SERVICE).deobfuscate(throwable, "INFO", GWT.getPermutationStrongName());
+    });
+
+    String stackMode = System.getProperty("compiler.stackMode");
+    currentStackMode.setText(stackMode);
+
+    switchStackModeBtn.addClickHandler(event -> {
+      UrlBuilder urlBuilder = new UrlBuilder();
+      urlBuilder.setProtocol(Window.Location.getProtocol());
+      urlBuilder.setHost(Window.Location.getHost());
+      urlBuilder.setParameter("compiler.stackMode", Objects.equals("native", stackMode) ? "emulated" : "native");
+      Window.Location.replace(urlBuilder.buildString());
+    });
   }
 
   private void databaseReloadUsers() {

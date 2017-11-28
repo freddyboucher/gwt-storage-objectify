@@ -9,13 +9,13 @@ import javax.ws.rs.core.MediaType;
 
 import org.fusesource.restygwt.client.DirectRestService;
 
-@Path("remote-logging")
-public interface RemoteLoggingService extends DirectRestService {
+@Path("deobfuscator")
+public interface DeobfuscatorService extends DirectRestService {
 
   @POST
-  @Path("logOnServer")
+  @Path("deobfuscate")
   @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
   @Produces(MediaType.APPLICATION_JSON)
-  String logOnServer(@FormParam("throwable") Throwable throwable, @FormParam("level") String level,
+  String deobfuscate(@FormParam("throwable") Throwable throwable, @FormParam("level") String level,
       @FormParam("permutationStrongName") String permutationStrongName);
 }

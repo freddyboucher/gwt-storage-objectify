@@ -15,7 +15,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.web.bindery.event.shared.UmbrellaException;
-import com.project.shared.RemoteLoggingService;
+import com.project.shared.DeobfuscatorService;
 import com.project.shared.RestConstant;
 
 /**
@@ -23,7 +23,7 @@ import com.project.shared.RestConstant;
  */
 public class App implements EntryPoint {
 
-  public static final RemoteLoggingService REMOTE_LOGGING_SERVICE = GWT.create(RemoteLoggingService.class);
+  public static final DeobfuscatorService DEOBFUSCATOR_SERVICE = GWT.create(DeobfuscatorService.class);
 
   /**
    * This is the entry point method.
@@ -37,14 +37,14 @@ public class App implements EntryPoint {
         REST.withCallback(new MethodCallback<String>() {
           @Override
           public void onFailure(Method method, Throwable throwable) {
-            Logger.getLogger("AppEntryPoint").log(Level.SEVERE, "Cannot log on Server.", throwable);
+            Logger.getLogger("AppEntryPoint").log(Level.SEVERE, "Cannot deobfuscate StackTrace.", throwable);
           }
 
           @Override
           public void onSuccess(Method method, String response) {
             Logger.getLogger("AppEntryPoint").info(response);
           }
-        }).call(REMOTE_LOGGING_SERVICE).logOnServer(throwable, "SEVERE", GWT.getPermutationStrongName());
+        }).call(DEOBFUSCATOR_SERVICE).deobfuscate(throwable, "SEVERE", GWT.getPermutationStrongName());
         Logger.getLogger("AppEntryPoint").log(Level.SEVERE, "", throwable);
       }
 

@@ -43,9 +43,19 @@
           </div>
         </div>
         <div>
-          <h3>Log on Server current StackTrace</h3>
+          <h3>Switch GWT compiler.stackMode (native/emulated)</h3>
           <div>
-            <g:Button ui:field="logOnServerBtn">Log on Server</g:Button>
+            <p>
+              Current:
+              <g:InlineLabel ui:field="currentStackMode" />
+            </p>
+            <g:Button ui:field="switchStackModeBtn">Switch/Reload</g:Button>
+          </div>
+        </div>
+        <div>
+          <h3>Server/Deobfuscate current StackTrace</h3>
+          <div>
+            <g:Button ui:field="logOnServerBtn">Deobfuscate</g:Button>
           </div>
         </div>
       </g:HTMLPanel>
