@@ -66,6 +66,10 @@
       <groupId>com.github.nmorel.gwtjackson</groupId>
       <artifactId>gwt-jackson-objectify</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.github.nmorel.gwtjackson</groupId>
+      <artifactId>gwt-jackson-remotelogging</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>com.google.guava</groupId>
@@ -81,6 +85,14 @@
       <artifactId>hibernate-validator</artifactId>
       <classifier>sources</classifier>
     </dependency>
+
+    <!--Not used but necessary to avoid GWT compilation error: [ERROR] Line 54: The constructor UmbrellaException() is not visible-->
+    <dependency>
+      <groupId>com.google.dagger</groupId>
+      <artifactId>dagger-compiler</artifactId>
+      <version>2.13</version>
+      <optional>true</optional>
+    </dependency>
   </dependencies>
 
   <build>
@@ -92,6 +104,7 @@
           <moduleName>com.project.App</moduleName>
           <moduleShortName>app</moduleShortName>
           <moduleTemplate>src/main/resources/App.gwt.xml</moduleTemplate>
+          <extra>${project.basedir}/target/${project.artifactId}-${project.version}/WEB-INF/deploy</extra>
         </configuration>
       </plugin>
     </plugins>

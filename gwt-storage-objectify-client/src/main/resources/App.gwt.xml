@@ -9,6 +9,7 @@
   <inherits name="org.fusesource.restygwt.RestyGWT" />
   <set-property name="restygwt.encodeDecode.useGwtJackson" value="true" />
   <inherits name="com.github.nmorel.gwtjackson.objectify.GwtJacksonObjectify" />
+  <inherits name="com.github.nmorel.gwtjackson.remotelogging.GwtJacksonRemoteLogging" />
 
   <inherits name="org.hibernate.validator.HibernateValidator" />
   <replace-with class="com.project.client.SimpleValidatorFactory">

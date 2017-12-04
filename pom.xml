@@ -99,6 +99,11 @@
         <artifactId>gwt-jackson-objectify</artifactId>
         <version>${gwt.jackson.version}</version>
       </dependency>
+      <dependency>
+        <groupId>com.github.nmorel.gwtjackson</groupId>
+        <artifactId>gwt-jackson-remotelogging</artifactId>
+        <version>${gwt.jackson.version}</version>
+      </dependency>
 
       <dependency>
         <groupId>com.googlecode.objectify</groupId>

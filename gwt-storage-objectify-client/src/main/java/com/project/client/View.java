@@ -3,7 +3,9 @@ package com.project.client;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Formatter;
 import java.util.logging.Level;
+import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import javax.validation.ConstraintViolation;
@@ -13,11 +15,13 @@ import javax.validation.groups.Default;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 import org.fusesource.restygwt.client.REST;
+import org.fusesource.restygwt.client.TextCallback;
 
 import com.github.nmorel.gwtjackson.client.ObjectMapper;
 import com.google.common.io.BaseEncoding;
 import com.google.common.primitives.Longs;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.logging.client.HasWidgetsLogHandler;
 import com.google.gwt.storage.client.Storage;
@@ -65,11 +69,25 @@ public class View extends Composite {
   Button localStorageReloadBtn;
   @UiField
   Button localStorageClearBtn;
+  @UiField
+  Button logOnServerBtn;
   private User lastCreatedUser;
 
   public View() {
     initWidget(uiBinder.createAndBindUi(this));
-    logger.addHandler(new HasWidgetsLogHandler(loggingPanel));
+    logger.addHandler(new HasWidgetsLogHandler(loggingPanel) {
+      @Override
+      public void publish(LogRecord record) {
+        if (!isLoggable(record)) {
+          return;
+        }
+        Formatter formatter = getFormatter();
+        String msg = formatter.format(record);
+        HTMLPanel pre = new HTMLPanel("pre", msg);
+        pre.getElement().getStyle().setWhiteSpace(Style.WhiteSpace.PRE_WRAP);
+        loggingPanel.add(pre);
+      }
+    });
 
     nameTextBox.getElement().setAttribute("placeholder", "User's name");
 
@@ -121,6 +139,18 @@ public class View extends Composite {
         }
       }
     });
+
+    logOnServerBtn.addClickHandler(event -> REST.withCallback(new TextCallback() {
+      @Override
+      public void onFailure(Method method, Throwable throwable) {
+        logger.log(Level.SEVERE, "Cannot log on Server.", throwable);
+      }
+
+      @Override
+      public void onSuccess(Method method, String response) {
+        logger.info(response);
+      }
+    }).call(App.REMOTE_LOGGING_SERVICE).logOnServer(new Throwable(), "INFO", GWT.getPermutationStrongName()));
   }
 
   private void databaseReloadUsers() {

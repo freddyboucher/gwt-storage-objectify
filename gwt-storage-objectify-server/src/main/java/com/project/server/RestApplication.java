@@ -13,6 +13,8 @@ public class RestApplication extends Application {
 
   @Override
   public Set<Class<?>> getClasses() {
-    return ImmutableSet.of(GreetingServiceImpl.class, JacksonConfig.class, RestExceptionMapper.class);
+    return ImmutableSet
+        .of(GreetingServiceImpl.class, RemoteLoggingServiceImpl.class, JacksonConfig.class, RestExceptionMapper.class, JacksonJsonParamConverterProvider.class,
+            JsonStringProvider.class);
   }
 }

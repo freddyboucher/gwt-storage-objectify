@@ -1,16 +1,16 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui">
   <ui:style>
-  .logging-panel {
-    background-color: rgba(28, 28, 28, 0.8);
-    min-height: 400px;
-    padding: 5px 10px;
-  }
-  
-  .empty:EMPTY:AFTER {
-    content: "No data";
-    color: gray;
-  }
+    .logging-panel {
+      background-color: rgba(28, 28, 28, 0.8);
+      min-height: 400px;
+      padding: 5px 10px;
+    }
+
+    .empty:EMPTY:AFTER {
+      content: "No data";
+      color: gray;
+    }
   </ui:style>
 
   <g:HorizontalPanel width="100%">
@@ -40,6 +40,12 @@
           <div>
             <g:Button ui:field="localStorageReloadBtn">Reload</g:Button>
             <g:Button ui:field="localStorageClearBtn">Clear</g:Button>
+          </div>
+        </div>
+        <div>
+          <h3>Log on Server current StackTrace</h3>
+          <div>
+            <g:Button ui:field="logOnServerBtn">Log on Server</g:Button>
           </div>
         </div>
       </g:HTMLPanel>
