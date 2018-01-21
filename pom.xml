@@ -29,7 +29,7 @@
     <gae.version>1.9.60</gae.version>
     <gae.application.version>1</gae.application.version>
     <resteasy.version>3.1.4.Final</resteasy.version>
-    <gwt.jackson.version>0.14.3-SNAPSHOT-20171203</gwt.jackson.version>
+    <gwt.jackson.version>0.15.0</gwt.jackson.version>
     <restygwt.version>2.2.3-SNAPSHOT-20171125</restygwt.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
