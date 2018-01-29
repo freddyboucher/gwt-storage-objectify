@@ -12,21 +12,6 @@
   <artifactId>gwt-storage-objectify-server</artifactId>
   <packaging>war</packaging>
 
-  <repositories>
-    <repository>
-      <id>3rd-party-repository</id>
-      <releases>
-        <enabled>true</enabled>
-        <checksumPolicy>ignore</checksumPolicy>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-        <checksumPolicy>ignore</checksumPolicy>
-      </snapshots>
-      <url>file://${project.basedir}/../3rd-party-repository</url>
-    </repository>
-  </repositories>
-
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
