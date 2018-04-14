@@ -18,6 +18,35 @@
   </properties>
 
   <dependencies>
+    <!-- Validatin api -->
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <classifier>sources</classifier>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- hibernate validation -->
+    <dependency>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator</artifactId>
+    </dependency>
+    <dependency>
+       <groupId>org.hibernate.validator</groupId>
+       <artifactId>hibernate-validator</artifactId>
+       <classifier>sources</classifier>
+       <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>de.knightsoft-net</groupId>
+      <artifactId>gwt-bean-validators</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>gwt-storage-objectify-shared</artifactId>
@@ -59,16 +88,6 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava-gwt</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-validator</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-validator</artifactId>
-      <classifier>sources</classifier>
     </dependency>
 
     <!--Not used but necessary to avoid GWT compilation error: [ERROR] Line 54: The constructor UmbrellaException() is not visible-->

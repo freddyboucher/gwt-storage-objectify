@@ -1,12 +1,13 @@
 package com.project.client;
 
+import com.google.gwt.core.client.GWT;
+import com.project.shared.entities.User;
+
 import javax.validation.Validator;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.validation.client.AbstractGwtValidatorFactory;
-import com.google.gwt.validation.client.GwtValidation;
-import com.google.gwt.validation.client.impl.AbstractGwtValidator;
-import com.project.shared.entities.User;
+import de.knightsoftnet.validators.client.AbstractGwtValidatorFactory;
+import de.knightsoftnet.validators.client.GwtValidation;
+import de.knightsoftnet.validators.client.impl.AbstractGwtValidator;
 
 public final class SimpleValidatorFactory extends AbstractGwtValidatorFactory {
 

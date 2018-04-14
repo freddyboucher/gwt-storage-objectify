@@ -37,7 +37,7 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.validation.client.impl.Validation;
+import de.knightsoftnet.validators.client.impl.Validation;
 import com.project.shared.GreetingService;
 import com.project.shared.entities.GreetingResponse;
 import com.project.shared.entities.User;

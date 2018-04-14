@@ -31,6 +31,9 @@
     <resteasy.version>3.1.4.Final</resteasy.version>
     <gwt.jackson.version>0.15.0</gwt.jackson.version>
     <restygwt.version>2.2.3</restygwt.version>
+    <validation-api.version>2.0.1.Final</validation-api.version>
+    <hibernate-validator.version>6.0.9.Final</hibernate-validator.version>
+    <gwt-bean-validators.version>0.53.3</gwt-bean-validators.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -38,6 +41,40 @@
 
   <dependencyManagement>
     <dependencies>
+      <!-- Validatin api -->
+      <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <version>${validation-api.version}</version><!--$NO-MVN-MAN-VER$-->
+      </dependency>
+      <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <version>${validation-api.version}</version>
+        <classifier>sources</classifier>
+        <scope>provided</scope>
+      </dependency>
+
+      <!-- hibernate validation -->
+      <dependency>
+        <groupId>org.hibernate.validator</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>${hibernate-validator.version}</version><!--$NO-MVN-MAN-VER$-->
+      </dependency>
+      <dependency>
+         <groupId>org.hibernate.validator</groupId>
+         <artifactId>hibernate-validator</artifactId>
+         <version>${hibernate-validator.version}</version><!--$NO-MVN-MAN-VER$-->
+         <classifier>sources</classifier>
+         <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>de.knightsoft-net</groupId>
+        <artifactId>gwt-bean-validators</artifactId>
+        <version>${gwt-bean-validators.version}</version>
+      </dependency>
+
       <dependency>
         <groupId>com.google.gwt</groupId>
         <artifactId>gwt</artifactId>
@@ -128,17 +165,6 @@
         <version>3.0.2</version>
       </dependency>
 
-      <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-validator</artifactId>
-        <version>4.1.0.Final</version>
-      </dependency>
-      <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-validator</artifactId>
-        <version>4.1.0.Final</version>
-        <classifier>sources</classifier>
-      </dependency>
       <dependency>
         <groupId>log4j</groupId>
         <artifactId>log4j</artifactId>
