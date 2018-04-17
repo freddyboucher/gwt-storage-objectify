@@ -45,14 +45,13 @@
       <dependency>
         <groupId>javax.validation</groupId>
         <artifactId>validation-api</artifactId>
-        <version>${validation-api.version}</version><!--$NO-MVN-MAN-VER$-->
+        <version>${validation-api.version}</version>
       </dependency>
       <dependency>
         <groupId>javax.validation</groupId>
         <artifactId>validation-api</artifactId>
         <version>${validation-api.version}</version>
         <classifier>sources</classifier>
-        <scope>provided</scope>
       </dependency>
 
       <!-- hibernate validation -->
@@ -62,11 +61,10 @@
         <version>${hibernate-validator.version}</version><!--$NO-MVN-MAN-VER$-->
       </dependency>
       <dependency>
-         <groupId>org.hibernate.validator</groupId>
-         <artifactId>hibernate-validator</artifactId>
-         <version>${hibernate-validator.version}</version><!--$NO-MVN-MAN-VER$-->
-         <classifier>sources</classifier>
-         <scope>provided</scope>
+        <groupId>org.hibernate.validator</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>${hibernate-validator.version}</version><!--$NO-MVN-MAN-VER$-->
+        <classifier>sources</classifier>
       </dependency>
 
       <dependency>

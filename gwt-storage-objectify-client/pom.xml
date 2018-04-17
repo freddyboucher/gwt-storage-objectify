@@ -27,7 +27,6 @@
       <groupId>javax.validation</groupId>
       <artifactId>validation-api</artifactId>
       <classifier>sources</classifier>
-      <scope>provided</scope>
     </dependency>
 
     <!-- hibernate validation -->
@@ -36,10 +35,9 @@
       <artifactId>hibernate-validator</artifactId>
     </dependency>
     <dependency>
-       <groupId>org.hibernate.validator</groupId>
-       <artifactId>hibernate-validator</artifactId>
-       <classifier>sources</classifier>
-       <scope>provided</scope>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <classifier>sources</classifier>
     </dependency>
 
     <dependency>
