@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE module SYSTEM "https://raw.githubusercontent.com/gwtproject/gwt/2.8.2/distro-source/core/src/gwt-module.dtd">
 <module>
+  <!-- Inherit our applications main module. -->
+  <inherits name='de.knightsoftnet.validators.GwtBeanValidators' />
   <inherits name='com.google.gwt.user.User' />
   <inherits name='com.google.gwt.user.theme.clean.Clean' />
   <inherits name="com.google.common.collect.Collect" />
@@ -11,7 +13,6 @@
   <inherits name="com.github.nmorel.gwtjackson.objectify.GwtJacksonObjectify" />
   <inherits name="com.github.nmorel.gwtjackson.remotelogging.GwtJacksonRemoteLogging" />
 
-  <inherits name="org.hibernate.validator.HibernateValidator" />
   <replace-with class="com.project.client.SimpleValidatorFactory">
     <when-type-is class="javax.validation.ValidatorFactory" />
   </replace-with>

@@ -14,7 +14,7 @@ It uses:
 - [GAE (Google App Engine)](http://developers.google.com/appengine/)
 - [Objectify](https://github.com/objectify/objectify)
 - [GWT HTML5 Storage](http://www.gwtproject.org/doc/latest/DevGuideHtml5Storage.html)
-- [Bean Validation](http://www.gwtproject.org/doc/latest/DevGuideValidation.html)
+- [Bean Validation](https://github.com/ManfredTremmel/gwt-bean-validators)
 - [Guava (& Guava GWT)](https://github.com/google/guava)
 
 It uses [tbroyer/gwt-maven-plugin](https://github.com/tbroyer/gwt-maven-plugin) and follows [tbroyer/gwt-maven-archetypes](https://github.com/tbroyer/gwt-maven-archetypes) recommended  project structure.
