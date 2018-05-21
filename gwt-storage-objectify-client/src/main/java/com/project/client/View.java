@@ -19,6 +19,7 @@ import org.fusesource.restygwt.client.REST;
 import org.fusesource.restygwt.client.TextCallback;
 
 import com.github.nmorel.gwtjackson.client.ObjectMapper;
+import com.github.nmorel.gwtjackson.remotelogging.shared.RemoteThrowable;
 import com.google.common.io.BaseEncoding;
 import com.google.common.primitives.Longs;
 import com.google.gwt.core.client.GWT;
@@ -37,10 +38,11 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
-import de.knightsoftnet.validators.client.impl.Validation;
 import com.project.shared.GreetingService;
 import com.project.shared.entities.GreetingResponse;
 import com.project.shared.entities.User;
+
+import de.knightsoftnet.validators.client.impl.Validation;
 
 public class View extends Composite {
 
@@ -160,7 +162,7 @@ public class View extends Composite {
           logger.log(Level.INFO, "Client StackTrace", throwable);
           logger.log(Level.INFO, "Server/Deobfuscated StackTrace\n" + response);
         }
-      }).call(App.DEOBFUSCATOR_SERVICE).deobfuscate(throwable, "INFO", GWT.getPermutationStrongName());
+      }).call(App.DEOBFUSCATOR_SERVICE).deobfuscate(new RemoteThrowable(throwable), "INFO", GWT.getPermutationStrongName());
     });
 
     String stackMode = System.getProperty("compiler.stackMode");

@@ -30,6 +30,10 @@
       <artifactId>gwt-jackson-objectify</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.github.nmorel.gwtjackson</groupId>
+      <artifactId>gwt-jackson-remotelogging</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava-gwt</artifactId>
       <scope>provided</scope>

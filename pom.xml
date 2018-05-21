@@ -29,7 +29,7 @@
     <gae.version>1.9.63</gae.version>
     <gae.application.version>1</gae.application.version>
     <resteasy.version>3.1.4.Final</resteasy.version>
-    <gwt.jackson.version>0.15.0</gwt.jackson.version>
+    <gwt-jackson.version>0.15.2</gwt-jackson.version>
     <restygwt.version>2.2.3</restygwt.version>
     <validation-api.version>2.0.1.Final</validation-api.version>
     <hibernate-validator.version>6.0.9.Final</hibernate-validator.version>
@@ -127,17 +127,17 @@
       <dependency>
         <groupId>com.github.nmorel.gwtjackson</groupId>
         <artifactId>gwt-jackson</artifactId>
-        <version>${gwt.jackson.version}</version>
+        <version>${gwt-jackson.version}</version>
       </dependency>
       <dependency>
         <groupId>com.github.nmorel.gwtjackson</groupId>
         <artifactId>gwt-jackson-objectify</artifactId>
-        <version>${gwt.jackson.version}</version>
+        <version>${gwt-jackson.version}</version>
       </dependency>
       <dependency>
         <groupId>com.github.nmorel.gwtjackson</groupId>
         <artifactId>gwt-jackson-remotelogging</artifactId>
-        <version>${gwt.jackson.version}</version>
+        <version>${gwt-jackson.version}</version>
       </dependency>
 
       <dependency>

@@ -9,6 +9,8 @@ import javax.ws.rs.core.MediaType;
 
 import org.fusesource.restygwt.client.DirectRestService;
 
+import com.github.nmorel.gwtjackson.remotelogging.shared.RemoteThrowable;
+
 @Path("deobfuscator")
 public interface DeobfuscatorService extends DirectRestService {
 
@@ -16,6 +18,6 @@ public interface DeobfuscatorService extends DirectRestService {
   @Path("deobfuscate")
   @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
   @Produces(MediaType.APPLICATION_JSON)
-  String deobfuscate(@FormParam("throwable") Throwable throwable, @FormParam("level") String level,
+  String deobfuscate(@FormParam("throwable") RemoteThrowable throwable, @FormParam("level") String level,
       @FormParam("permutationStrongName") String permutationStrongName);
 }

@@ -10,6 +10,7 @@ import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 import org.fusesource.restygwt.client.REST;
 
+import com.github.nmorel.gwtjackson.remotelogging.shared.RemoteThrowable;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
@@ -44,7 +45,7 @@ public class App implements EntryPoint {
           public void onSuccess(Method method, String response) {
             Logger.getLogger("AppEntryPoint").info(response);
           }
-        }).call(DEOBFUSCATOR_SERVICE).deobfuscate(throwable, "SEVERE", GWT.getPermutationStrongName());
+        }).call(DEOBFUSCATOR_SERVICE).deobfuscate(new RemoteThrowable(throwable), "SEVERE", GWT.getPermutationStrongName());
         Logger.getLogger("AppEntryPoint").log(Level.SEVERE, "", throwable);
       }
 
