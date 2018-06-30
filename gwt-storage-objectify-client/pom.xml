@@ -87,14 +87,6 @@
       <groupId>com.google.guava</groupId>
       <artifactId>guava-gwt</artifactId>
     </dependency>
-
-    <!--Not used but necessary to avoid GWT compilation error: [ERROR] Line 54: The constructor UmbrellaException() is not visible-->
-    <dependency>
-      <groupId>com.google.dagger</groupId>
-      <artifactId>dagger-compiler</artifactId>
-      <version>2.15</version>
-      <optional>true</optional>
-    </dependency>
   </dependencies>
 
   <build>
