@@ -30,6 +30,7 @@
     <gae.application.version>1</gae.application.version>
     <resteasy.version>3.1.4.Final</resteasy.version>
     <gwt-jackson.version>0.15.4</gwt-jackson.version>
+    <jackson.version>2.9.6</jackson.version>
     <restygwt.version>2.2.3</restygwt.version>
     <validation-api.version>2.0.1.Final</validation-api.version>
     <hibernate-validator.version>6.0.12.Final</hibernate-validator.version>
