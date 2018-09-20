@@ -27,5 +27,5 @@ To use it in **prod** mode:
 To use it in **dev** mode:
 - in */gwt-storage-objectify/* ➜ `mvn install -pl gwt-storage-objectify-shared -am` (only one time)
 - in */gwt-storage-objectify/gwt-storage-objectify-server/* ➜ `mvn appengine:devserver -Denv=dev -am`
-- in */gwt-storage-objectify/* ➜ `mvn gwt:codeserver -pl gwt-storage-objectify-client -am`
+- in */gwt-storage-objectify/gwt-storage-objectify-client/* ➜ `mvn gwt:codeserver -am`
 - then open your browser at [http://localhost:8888/](http://localhost:8888/)
