@@ -28,7 +28,7 @@
 
     <gae.version>1.9.67</gae.version>
     <gae.application.version>1</gae.application.version>
-    <resteasy.version>3.1.4.Final</resteasy.version>
+    <resteasy.version>3.6.1.Final</resteasy.version>
     <gwt-jackson.version>0.15.4</gwt-jackson.version>
     <jackson.version>2.9.6</jackson.version>
     <restygwt.version>2.2.3</restygwt.version>
@@ -101,7 +101,7 @@
       <dependency>
         <groupId>javax.ws.rs</groupId>
         <artifactId>javax.ws.rs-api</artifactId>
-        <version>2.0.1</version>
+        <version>2.1</version>
       </dependency>
 
       <dependency>
