@@ -183,6 +183,7 @@
         <configuration>
           <version>${gae.app.instance.version}</version>
           <port>8888</port>
+          <project>gwt-storage-objectify</project>
         </configuration>
       </plugin>
     </plugins>
