@@ -57,7 +57,7 @@ public class View extends Composite {
   @UiField
   TextBox nameTextBox;
   @UiField
-  Button saveBtn;
+  Button sendBtn;
   @UiField
   InlineLabel lastCreatedUserLabel;
   @UiField
@@ -100,7 +100,7 @@ public class View extends Composite {
 
     nameTextBox.getElement().setAttribute("placeholder", "User's name");
 
-    saveBtn.addClickHandler(event -> processUsername());
+    sendBtn.addClickHandler(event -> processUsername());
     nameTextBox.addKeyPressHandler(event -> {
       if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
         processUsername();
@@ -193,6 +193,11 @@ public class View extends Composite {
     }).call(GREETING_SERVICE).getUsers();
   }
 
+  private void enabledNameFields(boolean enabled) {
+    sendBtn.setEnabled(enabled);
+    nameTextBox.setEnabled(enabled);
+  }
+
   private void initLocalStorage() {
     if (localStorage != null) {
       if (localStorage.getItem(STORAGE_USERS_KEY) == null) {
@@ -240,35 +245,40 @@ public class View extends Composite {
   }
 
   private void processUsername() {
-    Set<ConstraintViolation<User>> violations = VALIDATOR.validateValue(User.class, "name", nameTextBox.getText().trim(), Default.class);
-    if (violations.isEmpty()) {
-      REST.withCallback(new MethodCallback<GreetingResponse>() {
-        @Override
-        public void onFailure(Method method, Throwable throwable) {
-          logger.log(Level.SEVERE, "greetServer has thrown an Exception.", throwable);
-        }
-
-        @Override
-        public void onSuccess(Method method, GreetingResponse greetingResponse) {
-          User user = greetingResponse.getUserRef().get();
-          if (greetingResponse.getCount() == 0) {
-            logger.info("A new User name:" + user.getName() + " id:" + user.getId() + " has been saved.");
+    if (sendBtn.isEnabled() && nameTextBox.isEnabled()) {
+      Set<ConstraintViolation<User>> violations = VALIDATOR.validateValue(User.class, "name", nameTextBox.getText().trim(), Default.class);
+      if (violations.isEmpty()) {
+        enabledNameFields(false);
+        REST.withCallback(new MethodCallback<GreetingResponse>() {
+          @Override
+          public void onFailure(Method method, Throwable throwable) {
+            logger.log(Level.SEVERE, "greetServer has thrown an Exception.", throwable);
+            enabledNameFields(true);
           }
-          // Guava GWT works well in front-end code
-          String idBase32Encoded = BaseEncoding.base32().encode(Longs.toByteArray(user.getId()));
-          logger.info("User id:" + user.getId() + " base32 encoded:" + idBase32Encoded);
 
-          GreetingDialogBox greetingDialogBox = new GreetingDialogBox(greetingResponse);
-          greetingDialogBox.asDialogBox().addCloseHandler(event -> nameTextBox.setFocus(true));
-          greetingDialogBox.center();
+          @Override
+          public void onSuccess(Method method, GreetingResponse greetingResponse) {
+            User user = greetingResponse.getUserRef().get();
+            if (greetingResponse.getCount() == 0) {
+              logger.info("A new User name:" + user.getName() + " id:" + user.getId() + " has been saved.");
+            }
+            // Guava GWT works well in front-end code
+            String idBase32Encoded = BaseEncoding.base32().encode(Longs.toByteArray(user.getId()));
+            logger.info("User id:" + user.getId() + " base32 encoded:" + idBase32Encoded);
 
-          nameTextBox.setText(null);
-          setLastCreatedUser(user);
-          databaseReloadUsers();
-        }
-      }).call(GREETING_SERVICE).greetServer(nameTextBox.getText().trim());
-    } else {
-      violations.forEach(constraintViolation -> logger.warning(constraintViolation.getMessage()));
+            GreetingDialogBox greetingDialogBox = new GreetingDialogBox(greetingResponse);
+            greetingDialogBox.asDialogBox().addCloseHandler(event -> nameTextBox.setFocus(true));
+            greetingDialogBox.center();
+
+            nameTextBox.setText(null);
+            setLastCreatedUser(user);
+            databaseReloadUsers();
+            enabledNameFields(true);
+          }
+        }).call(GREETING_SERVICE).greetServer(nameTextBox.getText().trim());
+      } else {
+        violations.forEach(constraintViolation -> logger.warning(constraintViolation.getMessage()));
+      }
     }
   }
 

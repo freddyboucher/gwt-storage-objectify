@@ -19,7 +19,7 @@
         <div>
           <h3>User's name</h3>
           <g:TextBox ui:field="nameTextBox" />
-          <g:Button ui:field="saveBtn">Send</g:Button>
+          <g:Button ui:field="sendBtn">Send</g:Button>
         </div>
         <div>
           <h3>Last User</h3>
