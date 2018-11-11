@@ -27,15 +27,19 @@ import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.http.client.UrlBuilder;
 import com.google.gwt.logging.client.HasWidgetsLogHandler;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.storage.client.Storage;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.project.shared.GreetingService;
@@ -52,34 +56,22 @@ public class View extends Composite {
   private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
   private static final GreetingService GREETING_SERVICE = GWT.create(GreetingService.class);
   private final Storage localStorage = Storage.getLocalStorageIfSupported();
-  @UiField
-  FlowPanel loggingPanel;
-  @UiField
-  TextBox nameTextBox;
-  @UiField
-  Button sendBtn;
-  @UiField
-  InlineLabel lastCreatedUserLabel;
-  @UiField
-  Button storeBtn;
-  @UiField
-  HTMLPanel databaseUsersPanel;
-  @UiField
-  Button databaseReloadBtn;
-  @UiField
-  Button databaseClearBtn;
-  @UiField
-  HTMLPanel localStorageUsersPanel;
-  @UiField
-  Button localStorageReloadBtn;
-  @UiField
-  Button localStorageClearBtn;
-  @UiField
-  Button logOnServerBtn;
-  @UiField
-  Button switchStackModeBtn;
-  @UiField
-  InlineLabel currentStackMode;
+  @UiField FlowPanel loggingPanel;
+  @UiField TextBox nameTextBox;
+  @UiField Button sendBtn;
+  @UiField InlineLabel lastCreatedUserLabel;
+  @UiField Button storeBtn;
+  @UiField HTMLPanel databaseUsersPanel;
+  @UiField Button databaseReloadBtn;
+  @UiField Button databaseClearBtn;
+  @UiField HTMLPanel localStorageUsersPanel;
+  @UiField Button localStorageReloadBtn;
+  @UiField Button localStorageClearBtn;
+  @UiField Button logOnServerBtn;
+  @UiField Button switchStackModeBtn;
+  @UiField InlineLabel currentStackMode;
+  @UiField Anchor commitId;
+  @UiField Label dirty;
   private User lastCreatedUser;
 
   public View() {
@@ -175,6 +167,12 @@ public class View extends Composite {
       urlBuilder.setParameter("compiler.stackMode", Objects.equals("native", stackMode) ? "emulated" : "native");
       Window.Location.replace(urlBuilder.buildString());
     });
+
+    Git git = GitObjectMapper.INSTANCE.read(Resources.INSTANCE.git().getText());
+    commitId.setText(git.gitCommitIdAbbrev);
+    commitId.setHref("https://github.com/freddyboucher/gwt-storage-objectify/commit/" + git.gitCommitIdAbbrev);
+    dirty.setVisible(git.gitDirty);
+    dirty.setText("Dirty: " + git.gitDirty);
   }
 
   private void databaseReloadUsers() {
@@ -285,6 +283,17 @@ public class View extends Composite {
   private void setLastCreatedUser(User user) {
     lastCreatedUser = user;
     lastCreatedUserLabel.setText(user.getName());
+  }
+
+  interface Resources extends ClientBundle {
+    Resources INSTANCE = GWT.create(Resources.class);
+
+    @Source("git.properties")
+    TextResource git();
+  }
+
+  public interface GitObjectMapper extends ObjectMapper<Git> {
+    GitObjectMapper INSTANCE = GWT.create(GitObjectMapper.class);
   }
 
   public interface UsersObjectMapper extends ObjectMapper<Set<User>> {

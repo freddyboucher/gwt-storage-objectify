@@ -11,6 +11,11 @@
       content: "No data";
       color: gray;
     }
+
+    .dirty {
+      color: orange;
+      font-weight: bold;
+    }
   </ui:style>
 
   <g:HorizontalPanel width="100%">
@@ -56,6 +61,13 @@
           <h3>Server/Deobfuscate current StackTrace</h3>
           <div>
             <g:Button ui:field="logOnServerBtn">Deobfuscate</g:Button>
+          </div>
+        </div>
+        <div>
+          <h3>Git infos</h3>
+          <div>
+            <g:Anchor ui:field="commitId" target="_BLANK" />
+            <g:Label ui:field="dirty" styleName="{style.dirty}" />
           </div>
         </div>
       </g:HTMLPanel>
