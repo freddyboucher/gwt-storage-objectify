@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.util.Collections;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -56,7 +57,7 @@ public class GreetingServiceImplTests extends Mockito {
   @Test
   public void testGreetServer() {
     String username = "username";
-    GreetingResponse greetingResponse1 = service.greetServer(username);
+    GreetingResponse greetingResponse1 = service.greetServer(username, Collections.emptyList(), Collections.emptyMap());
     ObjectifyService.ofy().flush();
     assertEquals(SERVER_INFO, greetingResponse1.getServerInfo());
     assertEquals(USER_AGENT, greetingResponse1.getUserAgent());
@@ -64,7 +65,7 @@ public class GreetingServiceImplTests extends Mockito {
     assertEquals(username, greetingResponse1.getUserRef().get().getName());
     assertEquals(0, greetingResponse1.getCount());
 
-    GreetingResponse greetingResponse2 = service.greetServer(username);
+    GreetingResponse greetingResponse2 = service.greetServer(username, Collections.emptyList(), Collections.emptyMap());
     ObjectifyService.ofy().flush();
     assertEquals(greetingResponse1.getUserRef(), greetingResponse2.getUserRef());
     assertEquals(1, greetingResponse2.getCount());
@@ -73,13 +74,13 @@ public class GreetingServiceImplTests extends Mockito {
   @Test
   public void testGreetServer_invalid() {
     expectedEx.expect(ConstraintViolationException.class);
-    service.greetServer("@");
+    service.greetServer("@", Collections.emptyList(), Collections.emptyMap());
   }
 
   @Test
   public void testGreetServer_null() {
     expectedEx.expect(IllegalArgumentException.class);
     expectedEx.expectMessage("user can't be null.");
-    service.greetServer(null);
+    service.greetServer(null, Collections.emptyList(), Collections.emptyMap());
   }
 }

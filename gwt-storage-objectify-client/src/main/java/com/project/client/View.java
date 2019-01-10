@@ -273,7 +273,7 @@ public class View extends Composite {
             databaseReloadUsers();
             enabledNameFields(true);
           }
-        }).call(GREETING_SERVICE).greetServer(nameTextBox.getText().trim());
+        }).call(GREETING_SERVICE).greetServer(nameTextBox.getText().trim(), Collections.emptyList(), Collections.emptyMap());
       } else {
         violations.forEach(constraintViolation -> logger.warning(constraintViolation.getMessage()));
       }

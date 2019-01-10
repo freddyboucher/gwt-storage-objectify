@@ -1,7 +1,9 @@
 package com.project.shared;
 
 import java.util.List;
+import java.util.Map;
 
+import javax.annotation.Nonnull;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -29,5 +31,6 @@ public interface GreetingService extends DirectRestService {
   @GET
   @Path("greetServer")
   @Produces(MediaType.APPLICATION_JSON)
-  GreetingResponse greetServer(@QueryParam("username") String username);
+  GreetingResponse greetServer(@QueryParam("username") String username, @Nonnull @QueryParam("unusedList") List<Integer> unusedList,
+      @Nonnull @QueryParam("unusedMaps") Map<String, Integer> unusedMaps);
 }

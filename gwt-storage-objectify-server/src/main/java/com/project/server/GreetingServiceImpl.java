@@ -1,8 +1,11 @@
 package com.project.server;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
@@ -22,10 +25,8 @@ import com.project.shared.entities.User;
 public class GreetingServiceImpl implements GreetingService {
 
   private static final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-  @Context
-  protected HttpServletRequest request;
-  @Context
-  protected ServletContext context;
+  @Context protected HttpServletRequest request;
+  @Context protected ServletContext context;
 
   @Override
   public void clearUsers() {
@@ -39,7 +40,9 @@ public class GreetingServiceImpl implements GreetingService {
   }
 
   @Override
-  public GreetingResponse greetServer(String username) {
+  public GreetingResponse greetServer(String username, @Nonnull List<Integer> unusedList, @Nonnull Map<String, Integer> unusedMaps) {
+    Objects.requireNonNull(unusedList);
+    Objects.requireNonNull(unusedMaps);
     if (username == null) {
       throw new IllegalArgumentException("user can't be null.");
     }

@@ -2,6 +2,7 @@ package com.project.server;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
+import java.util.Collection;
 import java.util.logging.Logger;
 
 import javax.annotation.Nonnull;
@@ -36,7 +37,7 @@ public class JacksonJsonParamConverterProvider implements ParamConverterProvider
 
   @Override
   public <T> ParamConverter<T> getConverter(Class<T> rawType, Type genericType, Annotation[] annotations) {
-    if (String.class.equals(rawType) || hasMethod(rawType, "valueOf") || hasMethod(rawType, "fromString")) {
+    if (String.class.equals(rawType) || hasMethod(rawType, "valueOf") || hasMethod(rawType, "fromString") || Collection.class.isAssignableFrom(rawType)) {
       return null;
     }
 
