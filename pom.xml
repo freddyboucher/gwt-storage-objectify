@@ -34,7 +34,7 @@
     <restygwt.version>2.2.3</restygwt.version>
     <validation-api.version>2.0.1.Final</validation-api.version>
     <hibernate-validator.version>6.0.13.Final</hibernate-validator.version>
-    <gwt-bean-validators.version>0.58.0</gwt-bean-validators.version>
+    <gwt-bean-validators.version>1.0.0</gwt-bean-validators.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
