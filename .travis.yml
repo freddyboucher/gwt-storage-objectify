@@ -3,16 +3,5 @@ language: java
 dist: trusty
 jdk:
 - oraclejdk8
-before_install:
-- openssl aes-256-cbc -K $encrypted_f5d702b1e9bf_key -iv $encrypted_f5d702b1e9bf_iv
-  -in gwt-storage-objectify-c10919fbb812.json.enc -out gwt-storage-objectify-c10919fbb812.json
-  -d
 install:
 - mvn clean install -B -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
-deploy:
-  provider: gae
-  keyfile: gwt-storage-objectify-c10919fbb812.json
-  project: gwt-storage-objectify
-  skip_cleanup: true
-  default: true
-  config: gwt-storage-objectify-server/target/gwt-storage-objectify-server-0.0.1-SNAPSHOT
