@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1" metadata-complete="true">
+
+  <absolute-ordering />
 
   <filter>
     <filter-name>ObjectifyFilter</filter-name>
@@ -10,6 +12,27 @@
     <filter-name>ObjectifyFilter</filter-name>
     <url-pattern>/api/*</url-pattern>
   </filter-mapping>
+
+  <listener>
+    <listener-class>com.project.server.OfyHelper</listener-class>
+  </listener>
+
+  <context-param>
+    <param-name>resteasy.servlet.mapping.prefix</param-name>
+    <param-value>/api</param-value>
+  </context-param>
+  <servlet>
+    <servlet-name>RestApplication</servlet-name>
+    <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServlet30Dispatcher</servlet-class>
+    <init-param>
+      <param-name>javax.ws.rs.Application</param-name>
+      <param-value>com.project.server.RestApplication</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RestApplication</servlet-name>
+    <url-pattern>/api/*</url-pattern>
+  </servlet-mapping>
 
   <!-- Default page to serve -->
   <welcome-file-list>
