@@ -26,7 +26,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
 
-    <gae.version>1.9.73</gae.version>
+    <gae.version>1.9.74</gae.version>
     <gae.application.version>1</gae.application.version>
     <resteasy.version>3.7.0.Final</resteasy.version>
     <gwt-jackson.version>0.15.4</gwt-jackson.version>
