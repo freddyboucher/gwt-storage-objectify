@@ -174,7 +174,7 @@
       <plugins>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.7.0</version>
+          <version>3.8.1</version>
         </plugin>
         <plugin>
           <groupId>net.ltgt.gwt.maven</groupId>
@@ -189,7 +189,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-source-plugin</artifactId>
-          <version>3.0.1</version>
+          <version>3.1.0</version>
           <executions>
             <execution>
               <id>attach-sources</id>
