@@ -7,7 +7,7 @@ Live demo: [https://gwt-storage-objectify.appspot.com/](https://gwt-storage-obje
 
 It uses:
 - [GWT (Google Web Toolkit)](http://www.gwtproject.org/)
-- REST/JSON service with shared JAX-RS 2.0 interface
+- REST/JSON service with shared JAX-RS 2.1 interface
   - server: [RESTEasy](http://resteasy.jboss.org/)
   - client [RestyGWT](http://resty-gwt.github.io/)
 - [GWT Logging](http://www.gwtproject.org/doc/latest/DevGuideLogging.html)
