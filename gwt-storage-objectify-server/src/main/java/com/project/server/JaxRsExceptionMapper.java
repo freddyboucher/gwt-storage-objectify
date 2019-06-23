@@ -16,8 +16,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Provider
-public class RestExceptionMapper implements ExceptionMapper<Throwable> {
-  private final Logger logger = Logger.getLogger(RestExceptionMapper.class.getName());
+public class JaxRsExceptionMapper implements ExceptionMapper<Throwable> {
+  private final Logger logger = Logger.getLogger(JaxRsExceptionMapper.class.getName());
   @Context
   HttpHeaders headers;
   @Context

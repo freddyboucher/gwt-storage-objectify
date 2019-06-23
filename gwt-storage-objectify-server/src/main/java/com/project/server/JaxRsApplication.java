@@ -9,12 +9,12 @@ import com.google.common.collect.ImmutableSet;
 import com.project.shared.RestConstant;
 
 @ApplicationPath(RestConstant.BASE_URI)
-public class RestApplication extends Application {
+public class JaxRsApplication extends Application {
 
   @Override
   public Set<Class<?>> getClasses() {
     return ImmutableSet
-        .of(GreetingServiceImpl.class, DeobfuscatorServiceImpl.class, JacksonConfig.class, RestExceptionMapper.class, JacksonJsonParamConverterProvider.class,
+        .of(GreetingServiceImpl.class, DeobfuscatorServiceImpl.class, JacksonConfig.class, JaxRsExceptionMapper.class, JacksonJsonParamConverterProvider.class,
             JsonStringProvider.class);
   }
 }
