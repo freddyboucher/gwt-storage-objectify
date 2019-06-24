@@ -19,7 +19,7 @@
   <!--                                           -->
   <!-- Any title is fine                         -->
   <!--                                           -->
-  <title>Demo of Objectify with gwt-storage lib</title>
+  <title>Spring Boot / GWT / JAX-RS demo project</title>
 
   <!--                                           -->
   <!-- This script loads your compiled module.   -->

@@ -1,14 +1,14 @@
 gwt-storage-objectify [![Build Status](https://travis-ci.org/freddyboucher/gwt-storage-objectify.svg?branch=master)](https://travis-ci.org/freddyboucher/gwt-storage-objectify)
 ===========
 
-This GWT project is a proof of concept that stores in the Browser Local Storage some Objectify Entities.
+This Spring Boot / GWT project is a proof of concept that stores in the Browser Local Storage some App Engine Objectify Entities.
 
 Live demo: [https://gwt-storage-objectify.appspot.com/](https://gwt-storage-objectify.appspot.com/)
 
 It uses:
 - [GWT (Google Web Toolkit)](http://www.gwtproject.org/)
 - REST/JSON service with shared JAX-RS 2.1 interface
-  - server: [RESTEasy](http://resteasy.jboss.org/)
+  - server: [Spring Boot](https://spring.io/projects/spring-boot) with [Resteasy](http://resteasy.jboss.org/) as JAX-RS Application
   - client [RestyGWT](http://resty-gwt.github.io/)
 - [GWT Logging](http://www.gwtproject.org/doc/latest/DevGuideLogging.html)
 - [GAE (Google App Engine)](http://developers.google.com/appengine/)

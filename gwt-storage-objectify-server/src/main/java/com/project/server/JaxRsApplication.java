@@ -5,9 +5,12 @@ import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
+import org.springframework.stereotype.Component;
+
 import com.google.common.collect.ImmutableSet;
 import com.project.shared.RestConstant;
 
+@Component
 @ApplicationPath(RestConstant.BASE_URI)
 public class JaxRsApplication extends Application {
 

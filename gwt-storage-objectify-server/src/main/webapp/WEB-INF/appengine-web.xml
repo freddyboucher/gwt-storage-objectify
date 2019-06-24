@@ -20,4 +20,8 @@
   <system-properties>
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
   </system-properties>
+
+  <staging>
+    <enable-jar-classes>false</enable-jar-classes>
+  </staging>
 </appengine-web-app>

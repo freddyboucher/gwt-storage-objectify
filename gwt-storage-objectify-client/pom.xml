@@ -12,11 +12,6 @@
   <artifactId>gwt-storage-objectify-client</artifactId>
   <packaging>gwt-app</packaging>
 
-  <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-  </properties>
-
   <dependencies>
     <!-- Validatin api -->
     <dependency>

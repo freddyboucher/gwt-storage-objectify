@@ -2,15 +2,15 @@ package com.project.server;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
 
 import org.jboss.resteasy.plugins.server.servlet.HttpServlet30Dispatcher;
+import org.springframework.stereotype.Component;
 
 import com.googlecode.objectify.ObjectifyService;
 import com.project.shared.entities.GreetingResponse;
 import com.project.shared.entities.User;
 
-@WebListener
+@Component
 public class OfyHelper implements ServletContextListener {
   public static void register() {
     ObjectifyService.register(User.class);
