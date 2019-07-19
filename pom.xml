@@ -31,7 +31,7 @@
     <resteasy.version>3.8.0.Final</resteasy.version>
     <gwt-jackson.version>0.15.4</gwt-jackson.version>
     <jackson.version>2.9.9</jackson.version>
-    <restygwt.version>2.2.4</restygwt.version>
+    <restygwt.version>2.2.5</restygwt.version>
     <validation-api.version>2.0.1.Final</validation-api.version>
     <hibernate-validator.version>6.0.16.Final</hibernate-validator.version>
     <gwt-bean-validators.version>1.0.5</gwt-bean-validators.version>
