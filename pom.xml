@@ -28,7 +28,7 @@
 
     <gae.version>1.9.76</gae.version>
     <gae.application.version>1</gae.application.version>
-    <resteasy.version>3.8.1.Final</resteasy.version>
+    <resteasy.version>4.2.0.Final</resteasy.version>
     <gwt-jackson.version>0.15.4</gwt-jackson.version>
     <jackson.version>2.9.9</jackson.version>
     <restygwt.version>2.2.5</restygwt.version>
@@ -106,7 +106,12 @@
 
       <dependency>
         <groupId>org.jboss.resteasy</groupId>
-        <artifactId>resteasy-jaxrs</artifactId>
+        <artifactId>resteasy-core-spi</artifactId>
+        <version>${resteasy.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.resteasy</groupId>
+        <artifactId>resteasy-core</artifactId>
         <version>${resteasy.version}</version>
       </dependency>
       <dependency>
@@ -118,6 +123,11 @@
         <groupId>org.jboss.resteasy</groupId>
         <artifactId>resteasy-jackson2-provider</artifactId>
         <version>${resteasy.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.resteasy</groupId>
+        <artifactId>resteasy-spring</artifactId>
+        <version>4.1.1.Final</version>
       </dependency>
 
       <dependency>
