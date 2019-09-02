@@ -3,7 +3,6 @@ package com.project.server;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.jboss.resteasy.plugins.server.servlet.HttpServlet30Dispatcher;
 import org.springframework.stereotype.Component;
 
 import com.googlecode.objectify.ObjectifyService;
@@ -24,7 +23,6 @@ public class OfyHelper implements ServletContextListener {
 
   @Override
   public void contextInitialized(ServletContextEvent event) {
-    assert event.getServletContext().getServletRegistration(HttpServlet30Dispatcher.class.getName()) == null;
     // This will be invoked as part of a warmup request, or the first user request if no warmup request was invoked.
     register();
   }
