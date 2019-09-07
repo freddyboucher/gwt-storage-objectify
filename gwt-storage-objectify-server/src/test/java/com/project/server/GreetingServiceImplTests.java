@@ -57,17 +57,17 @@ public class GreetingServiceImplTests extends Mockito {
   @Test
   public void testGreetServer() {
     String username = "username";
-    GreetingResponse greetingResponse1 = service.greetServer(username, Collections.emptyList(), Collections.emptyMap());
+    GreetingResponse greetingResponse = service.greetServer(username, Collections.emptyList(), Collections.emptyMap());
     ObjectifyService.ofy().flush();
-    assertEquals(SERVER_INFO, greetingResponse1.getServerInfo());
-    assertEquals(USER_AGENT, greetingResponse1.getUserAgent());
-    assertTrue(greetingResponse1.getUserRef().isLoaded());
-    assertEquals(username, greetingResponse1.getUserRef().get().getName());
-    assertEquals(0, greetingResponse1.getCount());
+    assertEquals(SERVER_INFO, greetingResponse.getServerInfo());
+    assertEquals(USER_AGENT, greetingResponse.getUserAgent());
+    assertTrue(greetingResponse.getUserRef().isLoaded());
+    assertEquals(username, greetingResponse.getUserRef().get().getName());
+    assertEquals(0, greetingResponse.getCount());
 
     GreetingResponse greetingResponse2 = service.greetServer(username, Collections.emptyList(), Collections.emptyMap());
     ObjectifyService.ofy().flush();
-    assertEquals(greetingResponse1.getUserRef(), greetingResponse2.getUserRef());
+    assertEquals(greetingResponse.getUserRef(), greetingResponse2.getUserRef());
     assertEquals(1, greetingResponse2.getCount());
   }
 
