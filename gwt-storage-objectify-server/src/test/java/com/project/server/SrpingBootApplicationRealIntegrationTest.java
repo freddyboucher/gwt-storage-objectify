@@ -73,7 +73,7 @@ public class SrpingBootApplicationRealIntegrationTest {
   public void testGreetServer() throws Exception {
     GreetingResponse response = greetingService.greetServer("Freddy", Collections.emptyList(), Collections.emptyMap());
     assertEquals("Undertow - 2.0.23.Final", response.getServerInfo());
-    assertTrue(response.getUserAgent().startsWith("Apache-HttpClient/4.5.4 (Java/1.8.0_"));
+    assertTrue(response.getUserAgent().startsWith("Apache-HttpClient/4.5.6 (Java/1.8.0_"));
     assertEquals(0, response.getCount());
     assertEquals(2L, response.getId().longValue());
     assertEquals(1L, response.getUserRef().get().getId().longValue());
