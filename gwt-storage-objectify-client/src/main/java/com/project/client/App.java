@@ -35,6 +35,7 @@ public class App implements EntryPoint {
       @Override
       public void onUncaughtException(Throwable e) {
         Throwable throwable = unwrap(e);
+        Gtag.gtag("event", "exception", Gtag.ExceptionParameters.create(throwable.getMessage(), true));
         REST.withCallback(new MethodCallback<String>() {
           @Override
           public void onFailure(Method method, Throwable throwable) {
