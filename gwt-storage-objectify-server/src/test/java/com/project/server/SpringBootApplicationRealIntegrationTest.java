@@ -39,8 +39,8 @@ import io.undertow.servlet.api.ThreadSetupHandler;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = SpringBootApplication.class)
 @TestPropertySource(properties = "server.port=8080")
-@ContextConfiguration(classes = SrpingBootApplicationRealIntegrationTest.Config.class)
-public class SrpingBootApplicationRealIntegrationTest {
+@ContextConfiguration(classes = SpringBootApplicationRealIntegrationTest.Config.class)
+public class SpringBootApplicationRealIntegrationTest {
   private static ApiProxy.Environment currentEnvironment;
   private ResteasyClient client;
   private LocalServiceTestHelper helper;
