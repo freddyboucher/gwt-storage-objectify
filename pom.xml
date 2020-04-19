@@ -32,7 +32,7 @@
     <jackson.version>2.10.3</jackson.version>
     <restygwt.version>2.2.6</restygwt.version>
     <validation-api.version>2.0.1.Final</validation-api.version>
-    <hibernate-validator.version>6.0.18.Final</hibernate-validator.version>
+    <hibernate-validator.version>6.1.0.Final</hibernate-validator.version>
     <gwt-bean-validators.version>1.2.0</gwt-bean-validators.version>
     <spring-boot-starter.version>2.2.6.RELEASE</spring-boot-starter.version>
 
