@@ -82,6 +82,13 @@
       <groupId>com.google.guava</groupId>
       <artifactId>guava-gwt</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+      <version>4.13</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -92,8 +99,20 @@
         <configuration>
           <moduleName>com.project.App</moduleName>
           <moduleShortName>app</moduleShortName>
-          <moduleTemplate>src/main/resources/App.gwt.xml</moduleTemplate>
+          <moduleTemplate>src/main/resources/com/project/App.gwt.xml</moduleTemplate>
           <extra>${project.basedir}/target/${project.artifactId}-${project.version}/WEB-INF/deploy</extra>
+          <testArgs>
+            <arg>-runStyle</arg>
+            <arg>HtmlUnit:Chrome</arg>
+          </testArgs>
+          <includes>
+            <include>**/*Test.java</include>
+            <include>**/*Suite.java</include>
+          </includes>
+          <excludes>
+            <!--GWTTestCase should be named ***GwtTests to not be run individually, but in a **Suite-->
+            <exclude>**/*GwtTests.java</exclude>
+          </excludes>
         </configuration>
       </plugin>
       <plugin>

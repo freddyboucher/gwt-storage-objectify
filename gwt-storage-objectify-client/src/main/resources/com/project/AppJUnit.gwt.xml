@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module SYSTEM "https://raw.githubusercontent.com/gwtproject/gwt/2.8.2/distro-source/core/src/gwt-module.dtd">
+
+<module>
+  <inherits name="com.google.gwt.junit.JUnit" />
+  <inherits name='com.project.App' />
+  <set-property name="compiler.stackMode" value="emulated" />
+</module>
