@@ -15,13 +15,23 @@
       <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
       <layout>default</layout>
     </repository>
+    <repository>
+      <id>google-snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/google-snapshots/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
   </repositories>
 
   <properties>
     <!-- App Engine Instances Version -->
     <gae.app.instance.version>0-0-1-snapshot</gae.app.instance.version>
 
-    <gwt.version>2.9.0-RC1</gwt.version>
+    <gwt.version>HEAD-SNAPSHOT</gwt.version>
 
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
