@@ -1,4 +1,4 @@
-gwt-storage-objectify [![Build Status](https://travis-ci.org/freddyboucher/gwt-storage-objectify.svg?branch=master)](https://travis-ci.org/freddyboucher/gwt-storage-objectify)
+gwt-storage-objectify
 ===========
 
 This Spring Boot / GWT project is a proof of concept that stores in the Browser Local Storage some App Engine Objectify Entities.
