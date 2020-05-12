@@ -1,5 +1,7 @@
 package com.project.client;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,6 +68,16 @@ public class App implements EntryPoint {
       Defaults.setDateFormat(null);
       Defaults.setDispatcher((method, builder) -> builder.send());
       RootPanel.get().add(new View());
+
+      GWT.log("direct call: " + Car.car.start());
+      List<Car> cars = Arrays.asList(Car.car);
+      try {
+        for (Car car : cars) {
+          car.start();
+        }
+      } catch (Exception exception) {
+        GWT.log("FAILED to iterate a @JsType in a List", exception);
+      }
     });
   }
 }

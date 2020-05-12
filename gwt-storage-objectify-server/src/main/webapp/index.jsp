@@ -20,6 +20,15 @@
     gtag('js', new Date());
     gtag('config', 'UA-159357892-2');
   </script>
+  <script>
+    class Car {
+      start() {
+        return "start";
+      }
+    }
+
+    var car = new Car();
+  </script>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="gwt:property" content="compiler.stackMode=<%=MoreObjects.firstNonNull(request.getParameter("compiler.stackMode"), "native")%>">
 
