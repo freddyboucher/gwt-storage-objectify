@@ -69,15 +69,12 @@ public class App implements EntryPoint {
       Defaults.setDispatcher((method, builder) -> builder.send());
       RootPanel.get().add(new View());
 
-      GWT.log("direct call: " + Car.car.start());
+      Logger.getLogger("").info("direct call: " + Car.car.start());
       List<Car> cars = Arrays.asList(Car.car);
-      try {
-        for (Car car : cars) {
-          car.start();
-        }
-      } catch (Exception exception) {
-        GWT.log("FAILED to iterate a @JsType in a List", exception);
+      for (Car car : cars) {
+        car.start();
       }
+      Logger.getLogger("").info("It never goes here!!");
     });
   }
 }
