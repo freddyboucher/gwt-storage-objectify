@@ -23,4 +23,4 @@ jobs:
       - name: Google Cloud SDK deploy
         uses: freddyboucher/gcloud/cli@master
         with:
-          args: --quiet --verbosity=warning --project=gwt-storage-objectify app deploy gwt-storage-objectify-server/target/gwt-storage-objectify-server-0.0.1-SNAPSHOT --version=0-0-1-snapshot --promote
+          args: --quiet --verbosity=warning --project=gwt-storage-objectify app deploy gwt-storage-objectify-server/target/gwt-storage-objectify-server-0.0.1-SNAPSHOT --version=$GITHUB_SHA --promote
