@@ -47,6 +47,12 @@
       <artifactId>resteasy-spring-boot-starter</artifactId>
       <version>4.5.1.Final</version>
       <scope>runtime</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>javax.validation</groupId>
+          <artifactId>validation-api</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.jboss.resteasy</groupId>

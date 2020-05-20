@@ -31,9 +31,9 @@
     <gwt-jackson.version>0.15.4</gwt-jackson.version>
     <jackson.version>2.11.0</jackson.version>
     <restygwt.version>2.2.6</restygwt.version>
-    <validation-api.version>2.0.1.Final</validation-api.version>
-    <hibernate-validator.version>6.0.18.Final</hibernate-validator.version>
-    <gwt-bean-validators.version>1.2.3</gwt-bean-validators.version>
+    <jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
+    <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
+    <gwt-bean-validators.version>1.3.0</gwt-bean-validators.version>
     <spring-boot-starter.version>2.2.7.RELEASE</spring-boot-starter.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -44,14 +44,14 @@
     <dependencies>
       <!-- Validatin api -->
       <dependency>
-        <groupId>javax.validation</groupId>
-        <artifactId>validation-api</artifactId>
-        <version>${validation-api.version}</version>
+        <groupId>jakarta.validation</groupId>
+        <artifactId>jakarta.validation-api</artifactId>
+        <version>${jakarta.validation-api.version}</version>
       </dependency>
       <dependency>
-        <groupId>javax.validation</groupId>
-        <artifactId>validation-api</artifactId>
-        <version>${validation-api.version}</version>
+        <groupId>jakarta.validation</groupId>
+        <artifactId>jakarta.validation-api</artifactId>
+        <version>${jakarta.validation-api.version}</version>
         <classifier>sources</classifier>
       </dependency>
 
@@ -80,6 +80,34 @@
         <version>${gwt.version}</version>
         <type>pom</type>
         <scope>import</scope>
+        <exclusions>
+          <exclusion>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>com.google.gwt</groupId>
+        <artifactId>gwt-servlet</artifactId>
+        <version>${gwt.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>com.google.gwt</groupId>
+        <artifactId>gwt-user</artifactId>
+        <version>${gwt.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+          </exclusion>
+        </exclusions>
       </dependency>
       <dependency>
         <groupId>javax.servlet</groupId>
