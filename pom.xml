@@ -28,7 +28,7 @@
 
     <gae.version>1.9.81</gae.version>
     <appengine-maven-plugin.version>1.9.80</appengine-maven-plugin.version>
-    <resteasy.version>4.5.3.Final</resteasy.version>
+    <resteasy.version>4.5.5.Final</resteasy.version>
     <gwt-jackson.version>0.15.4</gwt-jackson.version>
     <jackson.version>2.11.0</jackson.version>
     <restygwt.version>2.2.6</restygwt.version>
