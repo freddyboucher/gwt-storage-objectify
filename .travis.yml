@@ -1,7 +1,0 @@
-sudo: false
-language: java
-dist: trusty
-jdk:
-- oraclejdk8
-install:
-- mvn clean install -B -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
