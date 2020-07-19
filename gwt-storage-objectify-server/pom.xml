@@ -201,7 +201,7 @@
       <plugin>
         <groupId>com.google.appengine</groupId>
         <artifactId>appengine-maven-plugin</artifactId>
-        <version>${gae.version}</version>
+        <version>${appengine-maven-plugin.version}</version>
         <configuration>
           <version>${gae.app.instance.version}</version>
           <port>8888</port>
