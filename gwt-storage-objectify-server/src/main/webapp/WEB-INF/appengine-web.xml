@@ -24,8 +24,8 @@
   <staging>
     <enable-jar-classes>false</enable-jar-classes>
   </staging>
-  <basic-scaling>
+  <automatic-scaling>
     <max-instances>1</max-instances>
-    <idle-timeout>1m</idle-timeout>
-  </basic-scaling>
+  </automatic-scaling>
+  <instance-class>F1</instance-class>
 </appengine-web-app>
